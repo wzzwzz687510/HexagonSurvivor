@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: test2
   Description: 
   Notes: 
-  Type: 8
+  Type: 10
   Requirements:
     stats: []
   ItemStackSize: 1

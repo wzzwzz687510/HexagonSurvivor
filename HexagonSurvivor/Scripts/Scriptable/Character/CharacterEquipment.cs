@@ -18,7 +18,23 @@
         [ValidateInput("IsBody")]
         public EquipableItem Body;
 
+        [ValidateInput("IsLeg")]
+        public EquipableItem Leg;
+
+        [ValidateInput("IsFoot")]
+        public EquipableItem Foot;
+
 #if UNITY_EDITOR
+        private bool IsFoot(EquipableItem value)
+        {
+            return value == null || value.Type == ItemTypes.Foot;
+        }
+
+        private bool IsLeg(EquipableItem value)
+        {
+            return value == null || value.Type == ItemTypes.Leg;
+        }
+
         private bool IsBody(EquipableItem value)
         {
             return value == null || value.Type == ItemTypes.Body;

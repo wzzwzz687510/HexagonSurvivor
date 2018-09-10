@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 2800000, guid: d6fad636db2a0524e82bccf0cdc173a5, type: 3}
   Name: why
-  Description: what happened?
+  Description: what happened?I see
   Notes: 
-  Type: 8
+  Type: 10
   Requirements:
     stats: []
   ItemStackSize: 1

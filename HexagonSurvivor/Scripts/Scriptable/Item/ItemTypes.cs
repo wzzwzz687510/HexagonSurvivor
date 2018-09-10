@@ -7,6 +7,8 @@
         OffHand,
         Body,
         Head,
+        Leg,
+        Foot,
         Ring,
         Amulet,
         Boots,

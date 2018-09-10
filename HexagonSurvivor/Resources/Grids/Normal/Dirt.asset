@@ -8,20 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adaac9e87a193cb4687e7eaf00c75e67, type: 3}
-  m_Name: test
+  m_Script: {fileID: 11500000, guid: ebe1d9ad779d3ea4d82e2b2b048183bd, type: 3}
+  m_Name: Dirt
   m_EditorClassIdentifier: 
-  Icon: {fileID: 2800000, guid: 8e129f1ced1e71a4c89b5d2507434643, type: 3}
-  Name: anvil
+  Icon: {fileID: 2800000, guid: 0d35e43f24375b74d904feafae42d9aa, type: 3}
+  Name: Dirt
   Description: 
   Notes: 
-  Type: 10
   Requirements:
     stats: []
-  ItemStackSize: 1
-  ItemRarity: 0.19
-  Cooldown: 0.6
-  ConsumeOverTime: 0
-  Duration: 0
-  Modifiers:
-    stats: []
+  type: 1
+  images:
+  - {fileID: 21300000, guid: 0d35e43f24375b74d904feafae42d9aa, type: 3}
+  GridRarity: 0.42
