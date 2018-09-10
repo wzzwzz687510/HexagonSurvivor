@@ -5,7 +5,7 @@
     using System.Linq;
     using UnityEngine;
 
-    public abstract class ScriptableGrid : SerializedScriptableObject
+    public abstract class ScriptableGrid : ScriptableObject
     {
         protected const string LEFT_VERTICAL_GROUP = "Split/Left";
         protected const string STATS_BOX_GROUP = "Split/Left/Stats";
@@ -20,8 +20,8 @@
         [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
         public string Name;
 
-        [VerticalGroup("Split/Right")]
-        [TextArea(4, 14)]
+        [BoxGroup("Split/Right/Description")]
+        [HideLabel, TextArea(4, 14)]
         public string Description;
 
         [HorizontalGroup("Split", 0.5f, MarginLeft = 5, LabelWidth = 130)]
@@ -29,8 +29,17 @@
         [HideLabel, TextArea(4, 9)]
         public string Notes;
 
+        [VerticalGroup("Split/Right")]
+        public StatList Requirements;
+
+        [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
+        public GridType type;
+
         [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
         public Sprite[] images;
+
+        [BoxGroup(STATS_BOX_GROUP)]
+        public float GridRarity;
 
         static Dictionary<int, ScriptableGrid> cache;
         public static Dictionary<int, ScriptableGrid> dict

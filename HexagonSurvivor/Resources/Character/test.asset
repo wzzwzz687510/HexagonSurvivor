@@ -522,11 +522,11 @@ MonoBehaviour:
     Stats:
       stats:
       - Type: 0
-        Value: 13.002989
+        Value: 30.800823
       - Type: 1
-        Value: 18.14929
+        Value: 67.1458
       - Type: 2
-        Value: 22.315346
+        Value: 28.336758
       - Type: 3
         Value: 24.520905
       - Type: 4

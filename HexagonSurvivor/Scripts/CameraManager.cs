@@ -1,65 +1,67 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿namespace HexagonSurvivor
+{
+    using UnityEngine;
+    using UnityEngine.EventSystems;
 
-public class CameraManager : MonoBehaviour {
-
-    public EventSystem eventSystem;
-    public LayerMask RaycastLayerMask;
-    public UIGridElement selectedGrid;
-    public UIGridElement highlightedGrid;
-
-    void Awake()
+    public class CameraManager : MonoBehaviour
     {
-        if (eventSystem == null)
-        {
-            Debug.Log("[CameraManager]Did't set the EventSystem.");
-            eventSystem = GameObject.FindObjectOfType<EventSystem>();
-        }
 
-        if(RaycastLayerMask==0)
-        {
-            Debug.Log("[CameraManager]LayerMask equals zero,please check if you didn't set the LayerMask.");
-        }
-    }
+        public EventSystem eventSystem;
+        public LayerMask RaycastLayerMask;
+        public GridEntity selectedGrid;
+        public GridEntity highlightedGrid;
 
-    void Update()
-    {
-        if (this.IsOverUI())
+        void Awake()
         {
-            return;
-        }
-
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var hits = Physics2D.RaycastAll(mousePos, Vector2.zero,10, RaycastLayerMask);
-        if (Input.GetMouseButtonDown(1))
-        {
-            foreach (var hit in hits)
+            if (eventSystem == null)
             {
+                Debug.Log("[CameraManager]Did't set the EventSystem.");
+                eventSystem = GameObject.FindObjectOfType<EventSystem>();
+            }
+
+            if (RaycastLayerMask == 0)
+            {
+                Debug.Log("[CameraManager]LayerMask equals zero,please check if you didn't set the LayerMask.");
+            }
+        }
+
+        void Update()
+        {
+            if (this.IsOverUI())
+            {
+                return;
+            }
+
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var hits = Physics2D.RaycastAll(mousePos, Vector2.zero, 10, RaycastLayerMask);
+            if (Input.GetMouseButtonDown(1))
+            {
+                foreach (var hit in hits)
+                {
                     if (selectedGrid)
                         selectedGrid.Resume(true);
-                    selectedGrid = hit.collider.GetComponentInChildren<UIGridElement>();
+                    selectedGrid = hit.collider.GetComponentInChildren<GridEntity>();
                     if (selectedGrid)
                         selectedGrid.Select();
 
+                }
             }
-        }
-        else
-        {
-            foreach (var hit in hits)
+            else
             {
+                foreach (var hit in hits)
+                {
                     if (highlightedGrid)
                         highlightedGrid.Resume(false);
-                    highlightedGrid = hit.collider.GetComponentInChildren<UIGridElement>();
+                    highlightedGrid = hit.collider.GetComponentInChildren<GridEntity>();
                     if (highlightedGrid)
                         highlightedGrid.Highlight();
+                }
             }
         }
-    }
 
-    public bool IsOverUI()
-    {
-        return (eventSystem.IsPointerOverGameObject() || eventSystem.IsPointerOverGameObject(0));
+        public bool IsOverUI()
+        {
+            return (eventSystem.IsPointerOverGameObject() || eventSystem.IsPointerOverGameObject(0));
+        }
     }
 }

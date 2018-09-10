@@ -31,8 +31,7 @@
 
             // Add all scriptable object grids.
             tree.AddAllAssetsAtPath("", "Assets/HexagonSurvivor/Resources", typeof(ScriptableGrid), true)
-                .SortMenuItemsByName()
-                .ForEach(this.AddDragHandles);
+                .SortMenuItemsByName();
 
             // Add all scriptable object items.
             tree.AddAllAssetsAtPath("", "Assets/HexagonSurvivor/Resources", typeof(ScriptableItem), true)
@@ -75,7 +74,7 @@
                     {
                         obj.Name = obj.name;
                         base.TrySelectMenuItemWithObject(obj); // Selects the newly created item in the editor
-                });
+                    });
                 }
 
                 if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create Item")))

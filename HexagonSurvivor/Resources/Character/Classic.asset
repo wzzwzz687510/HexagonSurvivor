@@ -532,7 +532,7 @@ MonoBehaviour:
       - Type: 4
         Value: 39.347153
       - Type: 7
-        Value: 43.635742
+        Value: 60.36961
   StartingEquipment:
     MainHand: {fileID: 0}
     Offhand: {fileID: 0}

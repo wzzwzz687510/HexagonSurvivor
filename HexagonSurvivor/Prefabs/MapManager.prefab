@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4394454275355144}
-  - component: {fileID: 114427781781089638}
-  - component: {fileID: 114560770035288698}
+  - component: {fileID: 114907518793054084}
+  - component: {fileID: 114798314822651752}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -34,14 +34,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1169954073061894}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114427781781089638
+--- !u!114 &114798314822651752
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,13 +49,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1169954073061894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1465209106, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bfd5402e90635e4fa85bd0cb21069ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
---- !u!114 &114560770035288698
+  width: 50
+  height: 50
+  wallThresholdSize: 10
+  blockThresholdSize: 50
+  seed: Lucky Day
+  useRandomSeed: 0
+  passageWidth: 4
+  scriptableGrids:
+  - {fileID: 11400000, guid: 83d18dcc5daaa274b988ece5cc3e9290, type: 2}
+  - {fileID: 11400000, guid: aa203f2e4510e044ab931bb752f4ad19, type: 2}
+  gridElements: []
+  randomFillPercent: 50
+--- !u!114 &114907518793054084
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -63,10 +72,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1169954073061894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -57143145, guid: a040fb66244a7f54289914d98ea4ef7d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c32d30e7a99eb24790f726b8680891f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: 49f81ce863c2f724f8c376feab95e992, type: 2}
+  m_prefab: {fileID: 1972772229117962, guid: d9902e83a85bedd48b3e5a1a2b644ced, type: 2}

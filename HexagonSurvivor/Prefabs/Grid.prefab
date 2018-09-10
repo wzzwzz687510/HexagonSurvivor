@@ -37,9 +37,9 @@ GameObject:
   - component: {fileID: 4555920349172918}
   - component: {fileID: 212402848318142866}
   - component: {fileID: 60134200233335192}
-  - component: {fileID: 114499711210216242}
+  - component: {fileID: 114759841439801746}
   m_Layer: 8
-  m_Name: medieval_archery
+  m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ PolygonCollider2D:
       - {x: 0.6, y: -0.35}
       - {x: 0.6, y: 0.35}
       - {x: 0, y: 0.7}
---- !u!114 &114499711210216242
+--- !u!114 &114759841439801746
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1972772229117962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b736ea0a527fc45a9ee1769b55402b, type: 3}
+  m_Script: {fileID: 11500000, guid: b4a65892cefe7d1478fca98732945dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isSelected: 0
