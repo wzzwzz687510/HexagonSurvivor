@@ -585,11 +585,7 @@ MonoBehaviour:
   useRandomSeed: 1
   passageWidth: 4
   scriptableGrids:
-  - {fileID: 11400000, guid: 03fe6ee79cecbb44a89539a5557e9373, type: 2}
-  - {fileID: 11400000, guid: cb052d9a097d400429da58d818241f5a, type: 2}
   - {fileID: 11400000, guid: 83d18dcc5daaa274b988ece5cc3e9290, type: 2}
-  - {fileID: 11400000, guid: d53c0dd3980218a42a648c9b6ccc9d79, type: 2}
-  - {fileID: 11400000, guid: ab7fc2803d2088641b025d4397800197, type: 2}
-  - {fileID: 11400000, guid: 4cd53be6b65a9454d8a0c83586ffb3b6, type: 2}
+  - {fileID: 11400000, guid: aa203f2e4510e044ab931bb752f4ad19, type: 2}
   gridElements: []
   randomFillPercent: 50

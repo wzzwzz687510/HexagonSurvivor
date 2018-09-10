@@ -8,10 +8,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e9c30f32583b64ca222fa0c67883bb, type: 3}
-  m_Name: DirtWithTree
+  m_Script: {fileID: 11500000, guid: 307a790f1cb418f4a91d0fd91efbe351, type: 3}
+  m_Name: DirtwithTree
   m_EditorClassIdentifier: 
-  toolTip: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  Icon: {fileID: 2800000, guid: f8e0b7df0d84348408bc7582cc4d9110, type: 3}
+  Name: DirtwithTree
+  Description: 
+  Notes: 
   images:
   - {fileID: 21300000, guid: f8e0b7df0d84348408bc7582cc4d9110, type: 3}
   - {fileID: 21300000, guid: e47f1a45b5f22ba4b92fb19436005d98, type: 3}

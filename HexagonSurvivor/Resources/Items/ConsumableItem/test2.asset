@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adaac9e87a193cb4687e7eaf00c75e67, type: 3}
+  m_Name: test2
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 2800000, guid: 96fc084bfb55e8945b11dcdce7b0926e, type: 3}
+  Name: test2
+  Description: 
+  Notes: 
+  Type: 8
+  Requirements:
+    stats: []
+  ItemStackSize: 1
+  ItemRarity: 0
+  Cooldown: 0
+  ConsumeOverTime: 0
+  Duration: 0
+  Modifiers:
+    stats: []

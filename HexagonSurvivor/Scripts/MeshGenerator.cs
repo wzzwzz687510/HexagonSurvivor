@@ -1,28 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MeshGenerator : MonoBehaviour
+﻿namespace HexagonSurvivor
 {
-    public GameObject m_prefab;
-    public Dictionary<int[,], GameObject> mapRenderDictionary = new Dictionary<int[,], GameObject>();
+    using System.Collections.Generic;
+    using UnityEngine;
 
-    private GameObject mapParent;
-
-    public void GenerateMesh(List<MapGenerator.MapGrid> mapGrids)
+    public class MeshGenerator : MonoBehaviour
     {
-        Destroy(mapParent);
-        mapParent = new GameObject("MapHolder");
+        public GameObject m_prefab;
+        public Dictionary<int[,], GameObject> mapRenderDictionary = new Dictionary<int[,], GameObject>();
 
-        mapRenderDictionary.Clear();
+        private GameObject mapParent;
 
-        foreach (var mapGrid in mapGrids)
+        public void GenerateMesh(List<MapGenerator.MapGrid> mapGrids)
         {
-            GameObject go = Instantiate(m_prefab, new Vector3((mapGrid.tileX + mapGrid.tileY % 2 * 0.5f) * 1.25f, mapGrid.tileY * 1.0875f), Quaternion.identity, mapParent.transform);
-            go.GetComponent<SpriteRenderer>().sprite = mapGrid.gridElement.image;
-            mapRenderDictionary.Add(new int[mapGrid.tileX, mapGrid.tileY], go);
+            Destroy(mapParent);
+            mapParent = new GameObject("MapHolder");
 
+            mapRenderDictionary.Clear();
+
+            foreach (var mapGrid in mapGrids)
+            {
+                GameObject go = Instantiate(m_prefab, new Vector3((mapGrid.tileX + mapGrid.tileY % 2 * 0.5f) * 1.25f, mapGrid.tileY * 1.0875f), Quaternion.identity, mapParent.transform);
+                go.GetComponent<SpriteRenderer>().sprite = mapGrid.gridElement.image;
+                mapRenderDictionary.Add(new int[mapGrid.tileX, mapGrid.tileY], go);
+
+            }
         }
-    }
 
+    }
 }
