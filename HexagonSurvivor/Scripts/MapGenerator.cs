@@ -7,28 +7,35 @@
     public class MapGenerator : MonoBehaviour
     {
 
+        public GameObject meshPrefab;
+
         public int width;
         public int height;
         public int wallThresholdSize = 50;
         public int blockThresholdSize = 50;
 
+        public int biomeSize = 3;
+
         public string seed;
         public bool useRandomSeed;
         public int passageWidth = 4;
 
-        public ScriptableGrid[] scriptableGrids;
-        public List<GridElement> gridElements;
+        public BiomeGrid[] biomeElements;
 
         [Range(40, 50)]
         public int randomFillPercent;
 
         int[,] map;
         System.Random pseudoRandom;
-        private List<MapGrid> mapGrids = new List<MapGrid>();
+        private GameObject mapParent;
 
         void Start()
         {
-            init();
+            if (biomeElements.Length == 0)
+            {
+                Debug.Log("[Map Generator]Please set targets of biomeElements.");
+                return;
+            }
 
             GenerateMap();
         }
@@ -37,10 +44,6 @@
         {
             if (Input.GetMouseButtonDown(0))
             {
-                gridElements.Clear();
-                mapGrids.Clear();
-
-                init();
                 GenerateMap();
             }
         }
@@ -58,80 +61,120 @@
             ProcessMap();
             ArrangeGridType();
 
-            MeshGenerator meshGen = GetComponent<MeshGenerator>();
-            meshGen.GenerateMesh(mapGrids);
+            //MeshGenerator meshGen = GetComponent<MeshGenerator>();
+            //meshGen.GenerateMesh(mapGrids);
+            GenerateMesh();
+        }
+
+        void GenerateMesh()
+        {
+            Destroy(mapParent);
+            mapParent = new GameObject("MapHolder");
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    if (map[x, y] > -1)
+                    {
+                        GameObject go = Instantiate(meshPrefab, new Vector3((x + y % 2 * 0.5f) * 1.25f, y * 1.0875f), Quaternion.identity, mapParent.transform);
+                        go.GetComponent<GridEntity>().Init(new GridElement(biomeElements[map[x, y]]), new Vector2(x, y));
+                        //go.GetComponent<SpriteRenderer>().sprite = mapGrid.gridElement.image;
+                    }
+                }
+            }
         }
 
         void ArrangeGridType()
         {
-            for (int x = 0; x < width; x++)
+            int[] typeProbability = new int[biomeElements.Length];
+            int totalValue = 0, tmpRandom = 0;
+            for (int i = 0; i < biomeElements.Length; i++)
             {
-                for (int y = 0; y < height; y++)
+                totalValue += biomeElements[i].GridRarity;
+                typeProbability[i] = totalValue;
+            }
+
+            int biomeWidth = width / biomeSize + 1, biomeHeight = height / biomeSize + 1;
+            int[,] biomeType = new int[biomeWidth, biomeHeight];
+            for (int x = 0; x < biomeWidth; x++)
+            {
+                for (int y = 0; y < biomeHeight; y++)
                 {
-                    if (map[x, y] == 0)
+                    tmpRandom = pseudoRandom.Next(0, totalValue);
+                    for (int i = 0; i < biomeElements.Length; i++)
                     {
-                        map[x, y] = pseudoRandom.Next(0, gridElements.Count);
-                        //mapGrids.Add(new MapGrid(x, y, gridElements[pseudoRandom.Next(0, gridElements.Count)]));                
+                        if (tmpRandom < typeProbability[i])
+                        {
+                            biomeType[x, y] = i;
+                            GenerateBiome(x, y, i);
+                            break;
+                        }
                     }
                 }
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 2; i++)
             {
-                SmoothBiome();
+               //SmoothBiome();
             }
 
-            for (int x = 0; x < width; x++)
+        }
+
+        void GenerateBiome(int tileX, int tileY, int type)
+        {
+            for (int x = 0; x < biomeSize; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < biomeSize; y++)
                 {
-                    if (map[x, y] != -1)
-                        mapGrids.Add(new MapGrid(x, y, gridElements[map[x, y]]));
+                    if (!IsInMapRange(tileX * biomeSize + x, tileY * biomeSize + y))
+                        continue;
+                    if (map[tileX * biomeSize + x, tileY * biomeSize + y] == 0)
+                        map[tileX * biomeSize + x, tileY * biomeSize + y] = type;
                 }
             }
         }
 
         void SmoothBiome()
         {
+            int maxCnt = 0, maxType = 0;
+
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    for (int i = 0; i < gridElements.Count; i++)
+                    if (map[x, y] == -1)
                     {
-                        int neighbourTiles = GetSurroundingTileCount(x, y, i);
-
-                        if (neighbourTiles > 3)
-                            map[x, y] = i;
-                        //else if (neighbourTiles < 4)
-                        //map[x, y] = 0;
+                        continue;
                     }
-                }
-            }
-        }
 
-        int GetSurroundingTileCount(int gridX, int gridY, int index)
-        {
-            int tileCount = 0;
-            for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX++)
-            {
-                for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++)
-                {
-                    if (IsInMapRange(neighbourX, neighbourY))
+                    for (int i = 0; i < biomeElements.Length; i++)
                     {
-                        if (neighbourX != gridX || neighbourY != gridY)
+                        int neighbourTiles = 0;
+                        for (int neighbourX = x - 1; neighbourX <= x + 1; neighbourX++)
                         {
-                            tileCount += map[neighbourX, neighbourY] == index ? 1 : 0;
+                            for (int neighbourY = y - 1; neighbourY <= y + 1; neighbourY++)
+                            {
+                                if (IsInMapRange(neighbourX, neighbourY))
+                                {
+                                    if (neighbourX != x || neighbourY != y)
+                                    {
+                                        neighbourTiles += map[neighbourX, neighbourY] == i ? 1 : 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (neighbourTiles > maxCnt)
+                        {
+                            maxCnt = neighbourTiles;
+                            maxType = i;
                         }
                     }
-                    //else
-                    //{
-                    //    tileCount++;
-                    //}
+
+                    map[x, y] = maxType;
                 }
             }
-
-            return tileCount;
         }
 
         void ProcessMap()
@@ -427,14 +470,6 @@
             return x >= 0 && x < width && y >= 0 && y < height;
         }
 
-        void init()
-        {
-            foreach (var item in scriptableGrids)
-            {
-                gridElements.Add(new GridElement(item));
-            }
-        }
-
         void RandomFillMap()
         {
             if (useRandomSeed)
@@ -512,21 +547,6 @@
                 tileY = y;
             }
         }
-
-        public struct MapGrid
-        {
-            public int tileX;
-            public int tileY;
-            public GridElement gridElement;
-
-            public MapGrid(int x, int y, GridElement grid)
-            {
-                tileX = x;
-                tileY = y;
-                gridElement = grid;
-            }
-        }
-
 
         class LandBlock : IComparable<LandBlock>
         {

@@ -20,17 +20,10 @@
         [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
         public string Name;
 
-        [BoxGroup("Split/Right/Description")]
-        [HideLabel, TextArea(4, 14)]
-        public string Description;
-
         [HorizontalGroup("Split", 0.5f, MarginLeft = 5, LabelWidth = 130)]
-        [BoxGroup("Split/Right/Notes")]
+        [BoxGroup("Split/Notes")]
         [HideLabel, TextArea(4, 9)]
         public string Notes;
-
-        [VerticalGroup("Split/Right")]
-        public StatList Requirements;
 
         [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
         public GridType type;
@@ -39,7 +32,7 @@
         public Sprite[] images;
 
         [BoxGroup(STATS_BOX_GROUP)]
-        public float GridRarity;
+        public int GridRarity;
 
         static Dictionary<int, ScriptableGrid> cache;
         public static Dictionary<int, ScriptableGrid> dict

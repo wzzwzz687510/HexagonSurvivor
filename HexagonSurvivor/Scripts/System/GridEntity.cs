@@ -4,34 +4,27 @@
 
     public class GridEntity : MonoBehaviour
     {
-        public bool isSelected;
-        private SpriteRenderer m_spriteRenderer;
+        [HideInInspector]
+        public GridElement gridElement;
+        [HideInInspector]
+        public Vector2 position;
+        public SpriteManager m_spriteManager;
 
         void Start()
         {
-            m_spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+            if (!m_spriteManager)
+            {
+                m_spriteManager = GetComponent<SpriteManager>();
+                Debug.Log("[Grid Entity]Please set the target of m_spriteManager.");
+            }
         }
 
-        public void Resume(bool isSelect)
+        public void Init(GridElement gridElement,Vector2 position)
         {
-            if (isSelect) isSelected = false;
-            if (isSelected) return;
-            m_spriteRenderer.enabled = false;
+            this.gridElement = gridElement;
+            this.position = position;
+            m_spriteManager.SetImage(gridElement.image);
         }
 
-        public void Highlight()
-        {
-            if (isSelected) return;
-
-            m_spriteRenderer.color = Color.yellow;
-            m_spriteRenderer.enabled = true;
-        }
-
-        public void Select()
-        {
-            m_spriteRenderer.color = Color.green;
-            m_spriteRenderer.enabled = true;
-            isSelected = true;
-        }
     }
 }

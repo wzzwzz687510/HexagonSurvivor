@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 212402848318142866}
   - component: {fileID: 60134200233335192}
   - component: {fileID: 114759841439801746}
+  - component: {fileID: 114026925098275476}
   m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1972772229117962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.252, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4170173593404644}
@@ -102,6 +103,20 @@ PolygonCollider2D:
       - {x: 0.6, y: -0.35}
       - {x: 0.6, y: 0.35}
       - {x: 0, y: 0.7}
+--- !u!114 &114026925098275476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972772229117962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b65af38a4cb625d4399debaaba70b678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSelected: 0
+  m_spriteRenderer: {fileID: 212402848318142866}
+  selectSpriteRenderer: {fileID: 212664216441469574}
 --- !u!114 &114759841439801746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a65892cefe7d1478fca98732945dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 0
+  gridElement:
+    hash: 0
+  position: {x: 0, y: 0}
+  m_spriteManager: {fileID: 114026925098275476}
 --- !u!212 &212402848318142866
 SpriteRenderer:
   m_ObjectHideFlags: 1

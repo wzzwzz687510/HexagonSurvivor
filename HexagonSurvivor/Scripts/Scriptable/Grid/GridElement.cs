@@ -7,7 +7,6 @@
     public class GridElement
     {
         public int hash;
-        private int imageId;
         System.Random r;
 
         public GridElement(ScriptableGrid data)

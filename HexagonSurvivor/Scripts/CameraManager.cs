@@ -8,8 +8,10 @@
 
         public EventSystem eventSystem;
         public LayerMask RaycastLayerMask;
-        public GridEntity selectedGrid;
-        public GridEntity highlightedGrid;
+        public SpriteManager selectedGrid;
+        public SpriteManager highlightedGrid;
+
+        public GameObject go;
 
         void Awake()
         {
@@ -33,29 +35,30 @@
             }
 
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var hits = Physics2D.RaycastAll(mousePos, Vector2.zero, 10, RaycastLayerMask);
+            var hit = Physics2D.Raycast(mousePos, Vector2.zero, 10, RaycastLayerMask);
+            if (!hit)
+            {
+                return;
+            }
+
             if (Input.GetMouseButtonDown(1))
             {
-                foreach (var hit in hits)
-                {
-                    if (selectedGrid)
-                        selectedGrid.Resume(true);
-                    selectedGrid = hit.collider.GetComponentInChildren<GridEntity>();
-                    if (selectedGrid)
-                        selectedGrid.Select();
 
-                }
+                if (selectedGrid)
+                    selectedGrid.Resume(true);
+                selectedGrid = hit.collider.GetComponent<SpriteManager>();
+                if (selectedGrid)
+                    selectedGrid.Select();
             }
             else
             {
-                foreach (var hit in hits)
-                {
-                    if (highlightedGrid)
-                        highlightedGrid.Resume(false);
-                    highlightedGrid = hit.collider.GetComponentInChildren<GridEntity>();
-                    if (highlightedGrid)
-                        highlightedGrid.Highlight();
-                }
+
+                if (highlightedGrid)
+                    highlightedGrid.Resume(false);
+                highlightedGrid = hit.collider.GetComponent<SpriteManager>();
+                if (highlightedGrid)
+                    highlightedGrid.Highlight();
+
             }
         }
 

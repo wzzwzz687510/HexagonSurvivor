@@ -8,16 +8,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe1d9ad779d3ea4d82e2b2b048183bd, type: 3}
+  m_Script: {fileID: 11500000, guid: be264f59247bdf04bb16726b3fd344c4, type: 3}
   m_Name: Dirt
   m_EditorClassIdentifier: 
   Icon: {fileID: 2800000, guid: 0d35e43f24375b74d904feafae42d9aa, type: 3}
   Name: Dirt
-  Description: 
   Notes: 
-  Requirements:
-    stats: []
-  type: 1
+  type: 0
   images:
   - {fileID: 21300000, guid: 0d35e43f24375b74d904feafae42d9aa, type: 3}
-  GridRarity: 0.42
+  GridRarity: 3

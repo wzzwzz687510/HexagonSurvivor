@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4394454275355144}
   - component: {fileID: 114907518793054084}
   - component: {fileID: 114798314822651752}
+  - component: {fileID: 114330494693045824}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114330494693045824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1169954073061894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aadf0070babe9cf4a8566d1c4d56bd76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114798314822651752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -60,8 +72,8 @@ MonoBehaviour:
   useRandomSeed: 0
   passageWidth: 4
   scriptableGrids:
-  - {fileID: 11400000, guid: 83d18dcc5daaa274b988ece5cc3e9290, type: 2}
-  - {fileID: 11400000, guid: aa203f2e4510e044ab931bb752f4ad19, type: 2}
+  - {fileID: 11400000, guid: c45ae3d222ddc344ea9f8d541f4277d4, type: 2}
+  - {fileID: 11400000, guid: 6767c5541dc99b64c81a71b4191b23eb, type: 2}
   gridElements: []
   randomFillPercent: 50
 --- !u!114 &114907518793054084
