@@ -274,13 +274,13 @@ Prefab:
         type: 2}
       propertyPath: biomeElements.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 0f07ad320a29c5e4fa0a27cd71614e7a,
+      objectReference: {fileID: 11400000, guid: 36b0d21f7900b0a4796a004a622d632b,
         type: 2}
     - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
         type: 2}
       propertyPath: biomeElements.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 36b0d21f7900b0a4796a004a622d632b,
+      objectReference: {fileID: 11400000, guid: 0eb7a97cebe0ac0489ab63d9e68d571b,
         type: 2}
     - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
         type: 2}
@@ -292,7 +292,7 @@ Prefab:
         type: 2}
       propertyPath: biomeElements.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 0eb7a97cebe0ac0489ab63d9e68d571b,
+      objectReference: {fileID: 11400000, guid: 0f07ad320a29c5e4fa0a27cd71614e7a,
         type: 2}
     - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
         type: 2}
@@ -303,12 +303,22 @@ Prefab:
     - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
         type: 2}
       propertyPath: useRandomSeed
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
         type: 2}
       propertyPath: seed
       value: Lucky Day
+      objectReference: {fileID: 0}
+    - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
+        type: 2}
+      propertyPath: biomeSize
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
+        type: 2}
+      propertyPath: randomFillPercent
+      value: 43
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114907518793054084, guid: 41fb80001747e5741a106086347b3293, type: 2}

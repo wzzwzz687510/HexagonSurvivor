@@ -87,68 +87,45 @@
 
         void ArrangeGridType()
         {
-            int[] typeProbability = new int[biomeElements.Length];
-            int totalValue = 0, tmpRandom = 0;
-            for (int i = 0; i < biomeElements.Length; i++)
+            for (int i = 0; i < biomeElements.Length - 1; i++)
             {
-                totalValue += biomeElements[i].GridRarity;
-                typeProbability[i] = totalValue;
-            }
+                GenerateBiome(i, biomeElements[i].GridRarity);
 
-            int biomeWidth = width / biomeSize + 1, biomeHeight = height / biomeSize + 1;
-            int[,] biomeType = new int[biomeWidth, biomeHeight];
-            for (int x = 0; x < biomeWidth; x++)
-            {
-                for (int y = 0; y < biomeHeight; y++)
+                for (int j = 0; j < 4; j++)
                 {
-                    tmpRandom = pseudoRandom.Next(0, totalValue);
-                    for (int i = 0; i < biomeElements.Length; i++)
-                    {
-                        if (tmpRandom < typeProbability[i])
-                        {
-                            biomeType[x, y] = i;
-                            GenerateBiome(x, y, i);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            for (int i = 0; i < 2; i++)
-            {
-               //SmoothBiome();
-            }
-
-        }
-
-        void GenerateBiome(int tileX, int tileY, int type)
-        {
-            for (int x = 0; x < biomeSize; x++)
-            {
-                for (int y = 0; y < biomeSize; y++)
-                {
-                    if (!IsInMapRange(tileX * biomeSize + x, tileY * biomeSize + y))
-                        continue;
-                    if (map[tileX * biomeSize + x, tileY * biomeSize + y] == 0)
-                        map[tileX * biomeSize + x, tileY * biomeSize + y] = type;
+                    SmoothBiome(i);
                 }
             }
         }
 
-        void SmoothBiome()
+        void GenerateBiome(int mainType, int typeProbability)
         {
-            int maxCnt = 0, maxType = 0;
-
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if (map[x, y] == -1)
+                    if (map[x, y] == mainType)
+                    {
+                        Debug.Log("main type:" + mainType);
+                        map[x, y] = (pseudoRandom.Next(0, 100) < 40 + typeProbability) ? mainType + 1 : mainType;
+                        Debug.Log(map[x, y]);
+                    }
+                }
+            }
+        }
+
+        void SmoothBiome(int mainType)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    if (map[x, y] < mainType)
                     {
                         continue;
                     }
 
-                    for (int i = 0; i < biomeElements.Length; i++)
+                    for (int i = mainType; i < biomeElements.Length; i++)
                     {
                         int neighbourTiles = 0;
                         for (int neighbourX = x - 1; neighbourX <= x + 1; neighbourX++)
@@ -159,20 +136,21 @@
                                 {
                                     if (neighbourX != x || neighbourY != y)
                                     {
-                                        neighbourTiles += map[neighbourX, neighbourY] == i ? 1 : 0;
+                                        if (map[neighbourX, neighbourY] < mainType)
+                                        {
+                                            continue;
+                                        }
+                                        neighbourTiles += map[neighbourX, neighbourY] == mainType ? 1 : 0;
                                     }
                                 }
                             }
                         }
 
-                        if (neighbourTiles > maxCnt)
-                        {
-                            maxCnt = neighbourTiles;
-                            maxType = i;
-                        }
+                        if (neighbourTiles > 4)
+                            map[x, y] = mainType;
+                        else if (neighbourTiles < 4)
+                            map[x, y] = mainType + 1;
                     }
-
-                    map[x, y] = maxType;
                 }
             }
         }
