@@ -34,13 +34,13 @@
         public ItemTypes Type;
 
         [VerticalGroup("Split/Right")]
-        public StatList Requirements;
+        public StatList requirements;
 
         [BoxGroup(STATS_BOX_GROUP)]
-        public int ItemStackSize = 1;
+        public int maxStack = 1;
 
         [BoxGroup(STATS_BOX_GROUP)]
-        public float ItemRarity;
+        public float itemRarity;
 
         public abstract ItemTypes[] SupportedItemTypes { get; }
 

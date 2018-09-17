@@ -6,7 +6,6 @@
 
     public class MapGenerator : MonoBehaviour
     {
-
         public GameObject meshPrefab;
 
         public int width;
@@ -40,13 +39,13 @@
             GenerateMap();
         }
 
-        void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                GenerateMap();
-            }
-        }
+        //void Update()
+        //{
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        GenerateMap();
+        //    }
+        //}
 
         void GenerateMap()
         {
@@ -91,7 +90,7 @@
             {
                 GenerateBiome(i, biomeElements[i].GridRarity);
 
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     SmoothBiome(i);
                 }

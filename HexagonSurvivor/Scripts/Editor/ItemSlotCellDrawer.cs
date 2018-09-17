@@ -33,18 +33,18 @@
         protected override ItemSlot DrawElement(Rect rect, ItemSlot value)
         {
             var id = DragAndDropUtilities.GetDragAndDropId(rect);
-            DragAndDropUtilities.DrawDropZone(rect, value.Item ? value.Item.Icon : null, null, id); // Draws the drop-zone using the items icon.
+            DragAndDropUtilities.DrawDropZone(rect, value.item ? value.item.Icon : null, null, id); // Draws the drop-zone using the items icon.
 
-            if (value.Item != null)
+            if (value.item != null)
             {
                 // Item count
                 var countRect = rect.Padding(2).AlignBottom(16);
                 value.ItemCount = EditorGUI.IntField(countRect, Mathf.Max(1, value.ItemCount));
-                GUI.Label(countRect, "/ " + value.Item.ItemStackSize, SirenixGUIStyles.RightAlignedGreyMiniLabel);
+                GUI.Label(countRect, "/ " + value.item.ItemStackSize, SirenixGUIStyles.RightAlignedGreyMiniLabel);
             }
 
             value = DragAndDropUtilities.DropZone(rect, value);                                     // Drop zone for ItemSlot structs.
-            value.Item = DragAndDropUtilities.DropZone<ScriptableItem>(rect, value.Item);                     // Drop zone for Item types.
+            value.item = DragAndDropUtilities.DropZone<ScriptableItem>(rect, value.item);                     // Drop zone for Item types.
             value = DragAndDropUtilities.DragZone(rect, value, true, true);                         // Enables dragging of the ItemSlot
 
             return value;
