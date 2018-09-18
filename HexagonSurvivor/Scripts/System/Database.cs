@@ -202,28 +202,28 @@
             }
         }
 
-        static void LoadEquipment(Player player)
-        {
-            // fill all slots first
-            for (int i = 0; i < player.equipmentInfo.Length; ++i)
-                player.equipment.Add(new ItemSlot());
+        //static void LoadEquipment(Player player)
+        //{
+        //    // fill all slots first
+        //    for (int i = 0; i < player.equipmentInfo.Length; ++i)
+        //        player.equipment.Add(new ItemSlot());
 
-            // then load valid equipment and put into their slots
-            // (one big query is A LOT faster than querying each slot separately)
-            List<List<object>> table = ExecuteReader("SELECT name, slot, amount FROM character_equipment WHERE character=@character", new SqliteParameter("@character", player.name));
-            foreach (List<object> row in table)
-            {
-                string itemName = (string)row[0];
-                int slot = Convert.ToInt32((long)row[1]);
-                ScriptableItem itemData;
-                if (slot < player.equipmentInfo.Length && ScriptableItem.dict.TryGetValue(itemName.GetStableHashCode(), out itemData))
-                {
-                    Item item = new Item(itemData);
-                    int amount = Convert.ToInt32((long)row[2]);
-                    player.equipment[slot] = new ItemSlot(item, amount);
-                }
-            }
-        }
+        //    // then load valid equipment and put into their slots
+        //    // (one big query is A LOT faster than querying each slot separately)
+        //    List<List<object>> table = ExecuteReader("SELECT name, slot, amount FROM character_equipment WHERE character=@character", new SqliteParameter("@character", player.name));
+        //    foreach (List<object> row in table)
+        //    {
+        //        string itemName = (string)row[0];
+        //        int slot = Convert.ToInt32((long)row[1]);
+        //        ScriptableItem itemData;
+        //        if (slot < player.equipmentInfo.Length && ScriptableItem.dict.TryGetValue(itemName.GetStableHashCode(), out itemData))
+        //        {
+        //            Item item = new Item(itemData);
+        //            int amount = Convert.ToInt32((long)row[2]);
+        //            player.equipment[slot] = new ItemSlot(item, amount);
+        //        }
+        //    }
+        //}
 
         public static GameObject CharacterLoad(string characterName, List<Player> prefabs)
         {
@@ -249,12 +249,7 @@
                     player.level = Convert.ToInt32((long)mainrow[5]);
                     int health = Convert.ToInt32((long)mainrow[6]);
                     int mana = Convert.ToInt32((long)mainrow[7]);
-                    player.strength = Convert.ToInt32((long)mainrow[8]);
-                    player.intelligence = Convert.ToInt32((long)mainrow[9]);
-                    player.experience = (long)mainrow[10];
-                    player.skillExperience = (long)mainrow[11];
-                    player.gold = (long)mainrow[12];
-                    player.coins = (long)mainrow[13];
+                    player.experience = (long)mainrow[8];
 
                     // try to warp to loaded position.
                     // => agent.warp is recommended over transform.position and
@@ -270,20 +265,12 @@
                     }
 
                     LoadInventory(player);
-                    LoadEquipment(player);
-                    LoadSkills(player);
-                    LoadBuffs(player);
-                    LoadQuests(player);
-                    LoadGuild(player);
+                    //LoadEquipment(player);
 
                     // assign health / mana after max values were fully loaded
                     // (they depend on equipment, buffs, etc.)
                     player.health = health;
                     player.mana = mana;
-
-                    // addon system hooks
-                    Utils.InvokeMany(typeof(Database), null, "CharacterLoad_", player);
-
                     return go;
                 }
                 else Debug.LogError("no prefab found for class: " + className);
@@ -305,30 +292,27 @@
                                     new SqliteParameter("@character", player.name),
                                     new SqliteParameter("@slot", i),
                                     new SqliteParameter("@name", slot.item.name),
-                                    new SqliteParameter("@amount", slot.amount),
-                                    new SqliteParameter("@petHealth", slot.item.petHealth),
-                                    new SqliteParameter("@petLevel", slot.item.petLevel),
-                                    new SqliteParameter("@petExperience", slot.item.petExperience));
-            }
-        }
-
-        static void SaveEquipment(Player player)
-        {
-            // equipment: remove old entries first, then add all new ones
-            // (we could use UPDATE where slot=... but deleting everything makes
-            //  sure that there are never any ghosts)
-            ExecuteNonQuery("DELETE FROM character_equipment WHERE character=@character", new SqliteParameter("@character", player.name));
-            for (int i = 0; i < player.equipment.Count; ++i)
-            {
-                ItemSlot slot = player.equipment[i];
-                if (slot.amount > 0) // only relevant equip to save queries/storage/time
-                    ExecuteNonQuery("INSERT INTO character_equipment VALUES (@character, @slot, @name, @amount)",
-                                    new SqliteParameter("@character", player.name),
-                                    new SqliteParameter("@slot", i),
-                                    new SqliteParameter("@name", slot.item.name),
                                     new SqliteParameter("@amount", slot.amount));
             }
         }
+
+        //static void SaveEquipment(Player player)
+        //{
+        //    // equipment: remove old entries first, then add all new ones
+        //    // (we could use UPDATE where slot=... but deleting everything makes
+        //    //  sure that there are never any ghosts)
+        //    ExecuteNonQuery("DELETE FROM character_equipment WHERE character=@character", new SqliteParameter("@character", player.name));
+        //    for (int i = 0; i < player.equipment.Count; ++i)
+        //    {
+        //        ItemSlot slot = player.equipment[i];
+        //        if (slot.amount > 0) // only relevant equip to save queries/storage/time
+        //            ExecuteNonQuery("INSERT INTO character_equipment VALUES (@character, @slot, @name, @amount)",
+        //                            new SqliteParameter("@character", player.name),
+        //                            new SqliteParameter("@slot", i),
+        //                            new SqliteParameter("@name", slot.item.name),
+        //                            new SqliteParameter("@amount", slot.amount));
+        //    }
+        //}
 
         // adds or overwrites character data in the database
         public static void CharacterSave(Player player, bool online, bool useTransaction = true)
@@ -355,22 +339,11 @@
                             new SqliteParameter("@level", player.level),
                             new SqliteParameter("@health", player.health),
                             new SqliteParameter("@mana", player.mana),
-                            new SqliteParameter("@strength", player.strength),
-                            new SqliteParameter("@intelligence", player.intelligence),
                             new SqliteParameter("@experience", player.experience),
-                            new SqliteParameter("@skillExperience", player.skillExperience),
-                            new SqliteParameter("@gold", player.gold),
-                            new SqliteParameter("@coins", player.coins),
                             new SqliteParameter("@online", onlineString));
 
             SaveInventory(player);
-            SaveEquipment(player);
-            SaveSkills(player);
-            SaveBuffs(player);
-            SaveQuests(player);
-
-            // addon system hooks
-            Utils.InvokeMany(typeof(Database), null, "CharacterSave_", player);
+            //SaveEquipment(player);
 
             if (useTransaction) ExecuteNonQuery("END");
         }

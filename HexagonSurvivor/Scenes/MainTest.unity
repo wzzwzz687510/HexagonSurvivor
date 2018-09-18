@@ -578,6 +578,11 @@ Prefab:
       propertyPath: m_Name
       value: GridElement
       objectReference: {fileID: 0}
+    - target: {fileID: 114759841439801746, guid: d9902e83a85bedd48b3e5a1a2b644ced,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9902e83a85bedd48b3e5a1a2b644ced, type: 2}
   m_IsPrefabParent: 0

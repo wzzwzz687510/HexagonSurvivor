@@ -11,7 +11,7 @@
 
         public GridElement(ScriptableGrid data)
         {
-            hash = data.name.GetHashCode();
+            hash = data.name.GetStableHashCode();
             r = new System.Random(hash);
         }
 

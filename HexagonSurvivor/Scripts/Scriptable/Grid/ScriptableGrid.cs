@@ -41,7 +41,7 @@
             {
                 // load if not loaded yet
                 return cache ?? (cache = Resources.LoadAll<ScriptableGrid>("").ToDictionary(
-                    item => item.name.GetHashCode(), item => item)
+                    item => item.name.GetStableHashCode(), item => item)
                 );
             }
         }

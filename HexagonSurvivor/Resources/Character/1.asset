@@ -9,12 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f8351601677da04082f21d415801c2a, type: 3}
-  m_Name: Classic
+  m_Name: 1
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: a6a221b8b5dc2d746b5faca14ec01807, type: 2}
+    - {fileID: 11400000, guid: 33a233eb3f40022418baf2e5af5d19e7, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -22,7 +24,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Inventory
       Entry: 7
-      Data: 0|HexagonSurvivor.ItemSlot[,], Assembly-CSharp
+      Data: 0|HexagonSurvivor.ItemSlotData[,], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 40
@@ -31,11 +33,23 @@ MonoBehaviour:
       Data: 10|4
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
+      Entry: 3
+      Data: 2
+    - Name: item
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -43,11 +57,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -55,11 +69,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -67,11 +81,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
+      Entry: 3
+      Data: 0
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -79,11 +105,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -91,11 +117,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -103,11 +129,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
+      Entry: 3
+      Data: 1
+    - Name: item
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -115,11 +153,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -127,11 +165,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -139,11 +177,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
+      Entry: 3
+      Data: 0
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -151,11 +201,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -163,11 +213,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -175,11 +225,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -187,11 +237,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -199,11 +249,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -211,11 +261,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -223,11 +273,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -235,11 +285,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -247,11 +297,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -259,11 +309,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -271,11 +321,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -283,11 +333,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -295,11 +345,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -307,11 +357,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -319,11 +369,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -331,11 +381,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -343,11 +393,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -355,11 +405,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -367,11 +417,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -379,11 +429,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -391,11 +441,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -403,11 +453,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -415,11 +465,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -427,11 +477,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -439,11 +489,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -451,59 +501,11 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
+      Data: HexagonSurvivor.ItemSlotData, Assembly-CSharp
+    - Name: amount
       Entry: 3
       Data: 0
-    - Name: Item
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
-      Entry: 3
-      Data: 0
-    - Name: Item
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
-      Entry: 3
-      Data: 0
-    - Name: Item
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
-      Entry: 3
-      Data: 0
-    - Name: Item
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: HexagonSurvivor.ItemSlot, Assembly-CSharp
-    - Name: ItemCount
-      Entry: 3
-      Data: 0
-    - Name: Item
+    - Name: item
       Entry: 6
       Data: 
     - Name: 
@@ -516,25 +518,15 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Icon: {fileID: 2800000, guid: 9056a5a1f1cc1054a80f665d3e4b5074, type: 3}
-  Name: Classic
-  Level: 5
+  Name: classic
+  Level: 0
   Skills:
     Stats:
-      stats:
-      - Type: 0
-        Value: 41.062588
-      - Type: 1
-        Value: 36.774002
-      - Type: 2
-        Value: 54.29594
-      - Type: 3
-        Value: 21.090034
-      - Type: 4
-        Value: 39.347153
-      - Type: 7
-        Value: 60.36961
+      stats: []
   StartingEquipment:
     MainHand: {fileID: 0}
     Offhand: {fileID: 0}
     Head: {fileID: 0}
     Body: {fileID: 0}
+    Leg: {fileID: 0}
+    Foot: {fileID: 0}

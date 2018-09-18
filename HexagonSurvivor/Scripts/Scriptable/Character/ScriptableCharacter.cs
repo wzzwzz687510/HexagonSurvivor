@@ -16,7 +16,7 @@
         public int Level;
 
         [TabGroup("Starting Inventory")]
-        public ItemSlot[,] Inventory = new ItemSlot[10, 4];
+        public ItemSlotData[,] Inventory = new ItemSlotData[10, 4];
 
         [TabGroup("Starting Stats"), HideLabel]
         public CharacterStats Skills = new CharacterStats();

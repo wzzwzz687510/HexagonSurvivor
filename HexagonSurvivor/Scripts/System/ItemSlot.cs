@@ -7,10 +7,10 @@
     public struct ItemSlot
     {
         public int amount;
-        public ScriptableItem item;
+        public Item item;
 
         // constructors
-        public ItemSlot(ScriptableItem item, int amount = 1)
+        public ItemSlot(Item item, int amount = 1)
         {
             this.item = item;
             this.amount = amount;
@@ -29,7 +29,7 @@
         public int IncreaseAmount(int increaseBy)
         {
             // as many as possible
-            int limit = Mathf.Clamp(increaseBy, 0, item.maxStack - amount);
+            int limit = Mathf.Clamp(increaseBy, 0, item.maxStackSize - amount);
             amount += limit;
             return limit;
         }

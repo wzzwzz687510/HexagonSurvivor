@@ -11,15 +11,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adaac9e87a193cb4687e7eaf00c75e67, type: 3}
   m_Name: test
   m_EditorClassIdentifier: 
-  Icon: {fileID: 2800000, guid: 8e129f1ced1e71a4c89b5d2507434643, type: 3}
+  Icon: {fileID: 21300000, guid: d6fad636db2a0524e82bccf0cdc173a5, type: 3}
   Name: anvil
   Description: 
   Notes: 
   Type: 10
-  Requirements:
+  requirements:
     stats: []
-  ItemStackSize: 1
-  ItemRarity: 0.19
+  maxStackSize: 47
+  itemRarity: 0
+  buyPrice: 0
+  sellPrice: 0
+  itemMallPrice: 0
+  sellable: 0
+  tradable: 0
+  destroyable: 0
   Cooldown: 0.6
   ConsumeOverTime: 0
   Duration: 0

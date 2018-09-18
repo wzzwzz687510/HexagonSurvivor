@@ -186,18 +186,18 @@
         // note: this checks for one item type once. we can't use this function to
         //       check if we can add 10 potions and then 10 potions again (e.g. when
         //       doing player to player trading), because it will be the same result
-        public bool InventoryCanAdd(ScriptableItem item, int amount)
+        public bool InventoryCanAdd(Item item, int amount)
         {
             // go through each slot
             for (int i = 0; i < inventory.Count; ++i)
             {
                 // empty? then subtract maxstack
                 if (inventory[i].amount == 0)
-                    amount -= item.maxStack;
+                    amount -= item.maxStackSize;
                 // not empty. same type too? then subtract free amount (max-amount)
                 // note: .Equals because name AND dynamic variables matter (petLevel etc.)
                 else if (inventory[i].item.Equals(item))
-                    amount -= (inventory[i].item.maxStack - inventory[i].amount);
+                    amount -= (inventory[i].item.maxStackSize - inventory[i].amount);
 
                 // were we able to fit the whole amount already?
                 if (amount <= 0) return true;
@@ -211,7 +211,7 @@
         // trying to put them onto existing item stacks first
         // -> this is better than always adding items to the first free slot
         // -> function will only add them if there is enough space for all of them
-        public bool InventoryAdd(ScriptableItem item, int amount)
+        public bool InventoryAdd(Item item, int amount)
         {
             // we only want to add them if there is enough space for all of them, so
             // let's double check
@@ -241,7 +241,7 @@
                     // empty? then fill slot with as many as possible
                     if (inventory[i].amount == 0)
                     {
-                        int add = Mathf.Min(amount, item.maxStack);
+                        int add = Mathf.Min(amount, item.maxStackSize);
                         inventory[i] = new ItemSlot(item, add);
                         amount -= add;
                     }
