@@ -20,6 +20,7 @@
         public int passageWidth = 4;
 
         public BiomeGrid[] biomeElements;
+        public Dictionary<Vector2, GridEntity> dirGridEntity = new Dictionary<Vector2, GridEntity>();
 
         [Range(40, 50)]
         public int randomFillPercent;
@@ -99,7 +100,9 @@
                     if (map[x, y] > -1)
                     {
                         GameObject go = Instantiate(meshPrefab, new Vector2((x + y % 2 * 0.5f) * 1.25f, y * 1.0875f), Quaternion.identity, mapParent.transform);
-                        go.GetComponent<GridEntity>().Init(new GridElement(biomeElements[map[x, y]]), new Vector2(x, y));
+                        GridEntity gridEntity = go.GetComponent<GridEntity>();
+                        gridEntity.Init(new GridElement(biomeElements[map[x, y]]), new Vector2(x, y));
+                        dirGridEntity.Add(new Vector2(x,y),gridEntity);
                         //go.GetComponent<SpriteRenderer>().sprite = mapGrid.gridElement.image;
                     }
                 }
@@ -108,6 +111,17 @@
 
         void ArrangeGridType()
         {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    if (map[x, y] == 0)
+                    {
+
+                    }
+                }
+            }
+
             for (int i = 0; i < biomeElements.Length - 1; i++)
             {
                 GenerateBiome(i, biomeElements[i].GridRarity);

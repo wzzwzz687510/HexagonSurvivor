@@ -8,6 +8,7 @@
         public GridElement gridElement;
         [HideInInspector]
         public Vector2 position;
+        public bool isBlocked;
         public SpriteManager m_spriteManager;
 
         void Start()
