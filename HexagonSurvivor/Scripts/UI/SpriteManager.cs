@@ -34,7 +34,6 @@
         public void Highlight()
         {
             if (isSelected) return;
-
             selectSpriteRenderer.color = Color.yellow;
             selectSpriteRenderer.enabled = true;
         }

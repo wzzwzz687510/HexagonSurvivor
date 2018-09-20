@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4224353339061594}
   - component: {fileID: 212731030949593518}
   - component: {fileID: 114774129022948234}
-  - component: {fileID: 65140130981183576}
   - component: {fileID: 114799818289617170}
+  - component: {fileID: 61876809564040656}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -43,18 +43,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65140130981183576
-BoxCollider:
+--- !u!61 &61876809564040656
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1744441915419150}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.24, y: 0.24}
+    newSize: {x: 0.24, y: 0.24}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24, y: 0.24, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.24, y: 0.24}
+  m_EdgeRadius: 0
 --- !u!114 &114774129022948234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,6 +79,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86dd947427758043834acf72eb5fe1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 114799818289617170}
+  animator: {fileID: 0}
+  collider: {fileID: 61876809564040656}
+  _state: IDLE
+  level: 1
+  _healthMax:
+    baseValue: 100
+    bonusPerLevel: 0
+  invincible: 0
+  healthRecovery: 1
+  _healthRecoveryRate:
+    baseValue: 1
+    bonusPerLevel: 0
+  _hungerMax:
+    baseValue: 100
+    bonusPerLevel: 0
+  manaRecovery: 1
+  baseHungerRecoveryRate: 1
+  _damage:
+    baseValue: 1
+    bonusPerLevel: 0
+  _defense:
+    baseValue: 1
+    bonusPerLevel: 0
+  damagePopupPrefab: {fileID: 0}
+  currentSkill: -1
+  _effectMount: {fileID: 0}
+  nameOverlay: {fileID: 0}
+  lookDirection: {x: 0, y: -1}
+  inventory: []
+  account: 
+  className: 
+  maxLevel: 1
+  _experience: 0
+  _experienceMax:
+    baseValue: 10
+    bonusPerLevel: 10
+  inventorySize: 30
+  defaultItems: []
+  inventorySplitKeys: 300100002f010000
+  trash:
+    amount: 0
+    item:
+      hash: 0
 --- !u!114 &114799818289617170
 MonoBehaviour:
   m_ObjectHideFlags: 1

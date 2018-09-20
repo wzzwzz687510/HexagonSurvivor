@@ -6,8 +6,6 @@
 
     public class Player : Entity
     {
-        public NavMeshAgent2D m_navMeshAgent2D;
-
         // some meta info
         [HideInInspector] public string account = "";
         [HideInInspector] public string className = "";
@@ -55,6 +53,11 @@
 
         [Header("Trash")]
         public ItemSlot trash = new ItemSlot();
+
+        public void NavigateDestination(Vector2 v2)
+        {
+            agent.destination = v2;
+        }
 
     }
 }

@@ -7,7 +7,6 @@
     {
         [Header("Dependent")]
         public Camera m_camera;
-        public EventSystem eventSystem;
 
         [Header("LayerMask")]
         public LayerMask RaycastLayerMask;
@@ -40,12 +39,6 @@
                 m_camera = GetComponent<Camera>();
             }
 
-            if (!eventSystem)
-            {
-                Debug.Log("[CameraManager]Did't set eventSystem.");
-                eventSystem = GameObject.FindObjectOfType<EventSystem>();
-            }
-
             if (RaycastLayerMask == 0)
             {
                 Debug.Log("[CameraManager]LayerMask equals zero,please check if you didn't set the LayerMask.");
@@ -72,20 +65,23 @@
             }
 
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var hit = Physics2D.Raycast(mousePos, Vector2.zero, 10, RaycastLayerMask);
+            var hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, RaycastLayerMask);
             if (!hit)
             {
                 return;
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0))
             {
 
                 if (selectedGrid)
                     selectedGrid.Resume(true);
                 selectedGrid = hit.collider.GetComponent<SpriteManager>();
                 if (selectedGrid)
+                {
                     selectedGrid.Select();
+                    SystemManager._instance.OnClickMove(hit.collider.transform.position);
+                }
             }
             else
             {
@@ -97,11 +93,6 @@
                     highlightedGrid.Highlight();
 
             }
-        }
-
-        public bool IsOverUI()
-        {
-            return (eventSystem.IsPointerOverGameObject() || eventSystem.IsPointerOverGameObject(0));
         }
 
         void LateUpdate()

@@ -27,17 +27,12 @@
         int[,] map;
         System.Random pseudoRandom;
         private GameObject mapParent;
+        Vector2 spawnPoint;
 
-        void Start()
-        {
-            if (biomeElements.Length == 0)
-            {
-                Debug.Log("[Map Generator]Please set targets of biomeElements.");
-                return;
-            }
-
-            GenerateMap();
-        }
+        //void Start()
+        //{
+        //    GenerateMap();
+        //}
 
         //void Update()
         //{
@@ -47,8 +42,29 @@
         //    }
         //}
 
-        void GenerateMap()
+        public Vector2 GetSpawnPoint()
         {
+            return spawnPoint;
+        }
+
+        public Vector2 RandomAPosition()
+        {
+            var x = pseudoRandom.Next(0, width);
+            var y = pseudoRandom.Next(0, height);
+            if (map[x,y] == -1)
+                return RandomAPosition();
+
+            return new Vector2(x, y);
+        }
+
+        public void GenerateMap()
+        {
+            if (biomeElements.Length == 0)
+            {
+                Debug.Log("[Map Generator]Please set targets of biomeElements.");
+                return;
+            }
+
             map = new int[width, height];
             RandomFillMap();
 
@@ -63,6 +79,12 @@
             //MeshGenerator meshGen = GetComponent<MeshGenerator>();
             //meshGen.GenerateMesh(mapGrids);
             GenerateMesh();
+            CreateSpawnPoint();
+        }
+
+        void CreateSpawnPoint()
+        {
+            spawnPoint = RandomAPosition();
         }
 
         void GenerateMesh()
@@ -76,7 +98,7 @@
                 {
                     if (map[x, y] > -1)
                     {
-                        GameObject go = Instantiate(meshPrefab, new Vector3((x + y % 2 * 0.5f) * 1.25f, y * 1.0875f), Quaternion.identity, mapParent.transform);
+                        GameObject go = Instantiate(meshPrefab, new Vector2((x + y % 2 * 0.5f) * 1.25f, y * 1.0875f), Quaternion.identity, mapParent.transform);
                         go.GetComponent<GridEntity>().Init(new GridElement(biomeElements[map[x, y]]), new Vector2(x, y));
                         //go.GetComponent<SpriteRenderer>().sprite = mapGrid.gridElement.image;
                     }
@@ -105,9 +127,9 @@
                 {
                     if (map[x, y] == mainType)
                     {
-                        Debug.Log("main type:" + mainType);
+                        //Debug.Log("main type:" + mainType);
                         map[x, y] = (pseudoRandom.Next(0, 100) < 40 + typeProbability) ? mainType + 1 : mainType;
-                        Debug.Log(map[x, y]);
+                       // Debug.Log(map[x, y]);
                     }
                 }
             }
