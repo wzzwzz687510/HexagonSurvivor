@@ -54,9 +54,20 @@
         [Header("Trash")]
         public ItemSlot trash = new ItemSlot();
 
+        /// <summary>
+        /// Move related
+        /// </summary>
+        [HideInInspector] public Vector2 destination;
+        private Queue<Vector2> movePath;
+
         public void NavigateDestination(Vector2 v2)
         {
             agent.destination = v2;
+        }
+
+        public void SetDestination(Vector2 v2)
+        {
+
         }
 
     }
