@@ -1,7 +1,18 @@
 ﻿namespace HexagonSurvivor
 {
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.EventSystems;
+
+    public enum SelectType
+    {
+        Normal,
+        Ring,
+        TriangleUp,
+        TriangleDown,
+        Area,
+        Path
+    }
 
     public class CameraManager : MonoBehaviour
     {
@@ -12,9 +23,9 @@
         public LayerMask RaycastLayerMask;
 
         [HideInInspector]
-        public SpriteManager selectedGrid;
+        public List<SpriteManager> selectedGrid = new List<SpriteManager>();
         [HideInInspector]
-        public SpriteManager highlightedGrid;
+        public List<SpriteManager> highlightedGrid = new List<SpriteManager>();
 
         [Header("Snap to Pixel Grid")]
         public float pixelsToUnits = 16;
@@ -71,28 +82,7 @@
                 return;
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-
-                if (selectedGrid)
-                    selectedGrid.Resume(true);
-                selectedGrid = hit.collider.GetComponent<SpriteManager>();
-                if (selectedGrid)
-                {
-                    selectedGrid.Select();
-                    SystemManager._instance.OnClickMove(hit.collider.transform.position);
-                }
-            }
-            else
-            {
-
-                if (highlightedGrid)
-                    highlightedGrid.Resume(false);
-                highlightedGrid = hit.collider.GetComponent<SpriteManager>();
-                if (highlightedGrid)
-                    highlightedGrid.Highlight();
-
-            }
+            NormalSelect(hit);
         }
 
         void LateUpdate()
@@ -116,6 +106,78 @@
 
             // convert to 3D but keep Z to stay in front of 2D plane
             transform.position = new Vector3(position.x, position.y, transform.position.z);
+        }
+
+        void NormalSelect(RaycastHit2D hit)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+
+                if (selectedGrid.Count!=0)
+                {
+                    foreach (var item in selectedGrid)
+                    {
+                        if (item)
+                            item.Resume(true);
+                    }
+                    selectedGrid.Clear();
+                }
+                SpriteManager spriteManager = hit.collider.GetComponent<SpriteManager>();
+                if (spriteManager)
+                {
+                    selectedGrid.Add(spriteManager);
+                    foreach (var item in selectedGrid)
+                    {
+                        if (item)
+                            item.Select();
+                    }
+                    SystemManager._instance.OnClickMove(hit.collider.transform.position);
+                }
+            }
+            else
+            {
+
+                if (highlightedGrid.Count != 0)
+                {
+                    foreach (var item in highlightedGrid)
+                    {
+                        if (item)
+                            item.Resume(false);
+                    }
+                    highlightedGrid.Clear();
+                }
+                SpriteManager spriteManager = hit.collider.GetComponent<SpriteManager>();
+                if (spriteManager)
+                {
+                    highlightedGrid.Add(spriteManager);
+                    foreach (var item in highlightedGrid)
+                    {
+                        if (item)
+                            item.Highlight();
+                    }
+                }
+            }
+        }
+
+        void MultiplyAdd(SelectType selectType,GridEntity gridEntity)
+        {
+            switch (selectType)
+            {
+                case SelectType.Normal:
+                    break;
+                case SelectType.Ring:
+                    break;
+                case SelectType.TriangleUp:
+                    break;
+                case SelectType.TriangleDown:
+                    break;
+                case SelectType.Area:
+                    break;
+                case SelectType.Path:
+                    break;
+                default:
+                    break;
+            }
         }
     } 
 }
