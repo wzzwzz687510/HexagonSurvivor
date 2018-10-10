@@ -3,6 +3,27 @@ using UnityEngine;
 
 namespace HexagonSurvivor
 {
+    public struct CubeCoordinate
+    {
+        public int x, y, z;
+        public CubeCoordinate(int x, int y, int z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+    }
+
+    public struct HexCoordinate
+    {
+        public int col, row;
+        public HexCoordinate(int col, int row)
+        {
+            this.col = col;
+            this.row = row;
+        }
+    }
+
     public class GridUtils
     {
         public static Vector2[][] hexDirections = { new Vector2[] { new Vector2( 1, 0), new Vector2( 0, -1), new Vector2(-1, -1),
@@ -20,27 +41,6 @@ namespace HexagonSurvivor
             TopRight = 5
         }
 
-        public struct CubeCoordinate
-        {
-            public int x, y, z;
-            public CubeCoordinate(int x, int y, int z)
-            {
-                this.x = x;
-                this.y = y;
-                this.z = z;
-            }
-        }
-
-        public struct HexCoordinate
-        {
-            public int col, row;
-            public HexCoordinate(int col, int row)
-            {
-                this.col = col;
-                this.row = row;
-            }
-        }
-
         static HexCoordinate CubeCoordinate2HexCoordinate(CubeCoordinate cube)
         {
             var col = cube.x + (cube.z - (cube.z & 1)) / 2;
@@ -56,11 +56,21 @@ namespace HexagonSurvivor
             return new CubeCoordinate(x, y, z);
         }
 
-        static HexCoordinate HexNeighbor(HexCoordinate hex,int direction)
+        public static HexCoordinate HexNeighbor(HexCoordinate hex,int direction)
         {
             var parity = hex.row & 1;
             var dir = hexDirections[parity][direction];
             return new HexCoordinate(hex.col + (int)dir[0], hex.row + (int)dir[1]);
+        }
+
+        static HexCoordinate HexAdd(HexCoordinate hex, int direction,int radius)
+        {
+            HexCoordinate result = hex;
+            for (int i = 0; i < radius; i++)
+            {
+                result = HexNeighbor(result, direction);
+            }
+            return result;
         }
 
         static int CubeDistance(CubeCoordinate a, CubeCoordinate b)
@@ -119,7 +129,7 @@ namespace HexagonSurvivor
             return result;
         }
 
-        public static List<HexCoordinate> HexReachable(HexCoordinate start, int movement,MapGenerator mapGenerator)
+        public static List<HexCoordinate> HexReachable(HexCoordinate start, int movement)
         {
             List<HexCoordinate> visited = new List<HexCoordinate>();
             visited.Add(start);
@@ -135,7 +145,7 @@ namespace HexagonSurvivor
                     {
                         var neighbor = HexNeighbor(hex, dir);
                         GridEntity gridEntity;
-                        if (!visited.Contains(neighbor)&& mapGenerator.dirGridEntity.TryGetValue(new Vector2(neighbor.col, neighbor.row),out gridEntity))
+                        if (!visited.Contains(neighbor) && SystemManager._instance.mapGenerator.dirGridEntity.TryGetValue(new HexCoordinate(neighbor.col, neighbor.row), out gridEntity))
                         {
                             if (gridEntity.isBlocked)
                                 continue;
@@ -153,8 +163,41 @@ namespace HexagonSurvivor
         {
             List<HexCoordinate> result = new List<HexCoordinate>();
 
+            HexCoordinate cube = HexAdd(center, 4, radius);
+
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < radius; j++)
+                {
+                    result.Add(cube);
+                    cube = HexNeighbor(cube, i);
+                }
+            }
 
             return result;
+        }
+
+        public static List<HexCoordinate> HexSpiralRings(HexCoordinate center,int radius)
+        {
+            List<HexCoordinate> result = new List<HexCoordinate>();
+            List<HexCoordinate> temp;
+            for (int i = 0; i < radius; i++)
+            {
+                temp = HexRing(center, i);
+                foreach (var item in temp)
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
+        }
+
+        public static Queue<HexCoordinate> PathFinding(HexCoordinate start,HexCoordinate end)
+        {
+            Queue<HexCoordinate> visited = new Queue<HexCoordinate>();
+
+            return visited;
         }
     }
 }

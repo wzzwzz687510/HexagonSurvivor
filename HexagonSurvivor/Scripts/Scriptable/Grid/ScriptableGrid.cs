@@ -29,6 +29,9 @@
         public GridType type;
 
         [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
+        public float cost = 1;
+
+        [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
         public Sprite[] images;
 
         [BoxGroup(STATS_BOX_GROUP)]

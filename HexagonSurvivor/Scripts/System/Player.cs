@@ -62,12 +62,13 @@
 
         public void NavigateDestination(Vector2 v2)
         {
+            List<HexCoordinate> hexCoordinates;
             agent.destination = v2;
         }
 
         public void SetDestination(Vector2 v2)
         {
-
+            destination = v2;
         }
 
     }

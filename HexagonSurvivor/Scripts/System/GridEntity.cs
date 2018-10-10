@@ -7,7 +7,7 @@
         [HideInInspector]
         public GridElement gridElement;
         [HideInInspector]
-        public Vector2 position;
+        public HexCoordinate hex;
         public bool isBlocked;
         public SpriteManager m_spriteManager;
 
@@ -23,7 +23,7 @@
         public void Init(GridElement gridElement,Vector2 position)
         {
             this.gridElement = gridElement;
-            this.position = position;
+            this.hex = new HexCoordinate((int)position.x, (int)position.y);
             m_spriteManager.SetImage(gridElement.image);
         }
 

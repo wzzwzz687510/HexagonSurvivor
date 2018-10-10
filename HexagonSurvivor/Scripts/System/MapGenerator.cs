@@ -20,7 +20,7 @@
         public int passageWidth = 4;
 
         public BiomeGrid[] biomeElements;
-        public Dictionary<Vector2, GridEntity> dirGridEntity = new Dictionary<Vector2, GridEntity>();
+        public Dictionary<HexCoordinate, GridEntity> dirGridEntity = new Dictionary<HexCoordinate, GridEntity>();
 
         [Range(40, 50)]
         public int randomFillPercent;
@@ -102,7 +102,7 @@
                         GameObject go = Instantiate(meshPrefab, new Vector2((x + y % 2 * 0.5f) * 1.25f, y * 1.0875f), Quaternion.identity, mapParent.transform);
                         GridEntity gridEntity = go.GetComponent<GridEntity>();
                         gridEntity.Init(new GridElement(biomeElements[map[x, y]]), new Vector2(x, y));
-                        dirGridEntity.Add(new Vector2(x,y),gridEntity);
+                        dirGridEntity.Add(new HexCoordinate(x, y), gridEntity);
                         //go.GetComponent<SpriteRenderer>().sprite = mapGrid.gridElement.image;
                     }
                 }

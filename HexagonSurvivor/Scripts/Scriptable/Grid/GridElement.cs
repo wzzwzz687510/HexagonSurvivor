@@ -19,5 +19,6 @@
         public ScriptableGrid data { get { return ScriptableGrid.dict[hash]; } }
         public string name { get { return data.name; } }
         public Sprite image { get { return data.images[r.Next(0, data.images.Length)]; } }
+        public float cost { get { return data.cost; } }
     }
 }
