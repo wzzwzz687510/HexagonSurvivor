@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65af38a4cb625d4399debaaba70b678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectColor: {r: 0.36764705, g: 1, b: 0.45050716, a: 0.39215687}
+  highlightColor: {r: 1, g: 0, b: 0, a: 0.39215687}
   isSelected: 0
   m_spriteRenderer: {fileID: 212402848318142866}
   selectSpriteRenderer: {fileID: 212664216441469574}
@@ -130,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridElement:
     hash: 0
-  position: {x: 0, y: 0}
+  isBlocked: 0
   m_spriteManager: {fileID: 114026925098275476}
 --- !u!212 &212402848318142866
 SpriteRenderer:
@@ -209,9 +211,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0663bbf5fd8e0684bb016ea5fa6e28f5, type: 3}
-  m_Color: {r: 0.9705882, g: 0.24264705, b: 0.24264705, a: 1}
+  m_Color: {r: 0.9705882, g: 0.24264705, b: 0.24264705, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

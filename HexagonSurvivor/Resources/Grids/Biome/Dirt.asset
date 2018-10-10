@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Dirt
   Notes: 
   type: 0
+  cost: 1
   images:
   - {fileID: 21300000, guid: 0d35e43f24375b74d904feafae42d9aa, type: 3}
-  GridRarity: 3
+  GridRarity: 0

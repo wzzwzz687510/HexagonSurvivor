@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Mars
   Notes: 
   type: 0
+  cost: 1
   images:
   - {fileID: 21300000, guid: e53565041b24d0744819a1f3197d5e57, type: 3}
   GridRarity: 1

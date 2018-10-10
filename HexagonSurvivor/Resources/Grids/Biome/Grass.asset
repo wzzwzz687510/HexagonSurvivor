@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Grass
   Notes: 
   type: 0
+  cost: 1
   images:
   - {fileID: 21300000, guid: c7f9a547dc068c94ba042ad96f5acd96, type: 3}
   GridRarity: 4

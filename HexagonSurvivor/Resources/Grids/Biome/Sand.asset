@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Sand
   Notes: 
   type: 0
+  cost: 1
   images:
   - {fileID: 21300000, guid: 9ac2ee566c4b30343b1ba069355ea85b, type: 3}
   GridRarity: 2
