@@ -146,10 +146,11 @@
                     }
                     highlightedGrid.Clear();
                 }
-                SpriteManager spriteManager = hit.collider.GetComponent<SpriteManager>();
-                if (spriteManager)
+                GridEntity gridEntity = hit.collider.GetComponent<GridEntity>();
+                if (gridEntity)
                 {
-                    highlightedGrid.Add(spriteManager);
+                    MultiplyAdd(SelectType.Ring, gridEntity);
+                    //highlightedGrid.Add(spriteManager);
                     foreach (var item in highlightedGrid)
                     {
                         if (item)
@@ -164,8 +165,17 @@
             switch (selectType)
             {
                 case SelectType.Normal:
+                    highlightedGrid.Add(gridEntity.GetComponent<SpriteManager>());
                     break;
                 case SelectType.Ring:
+                    List<HexCoordinate> hexCoordinates = GridUtils.HexRing(gridEntity.hex, 1);
+                    GridEntity tempGrid;
+                    foreach (var item in hexCoordinates)
+                    {
+                        SystemManager._instance.mapGenerator.dirGridEntity.TryGetValue(item, out tempGrid);
+                        if (tempGrid)
+                            highlightedGrid.Add(tempGrid.GetComponent<SpriteManager>());
+                    }       
                     break;
                 case SelectType.TriangleUp:
                     break;

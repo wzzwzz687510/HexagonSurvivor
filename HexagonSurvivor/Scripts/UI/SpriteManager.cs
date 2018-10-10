@@ -4,7 +4,9 @@
 
     public class SpriteManager : MonoBehaviour
     {
-
+        public Color selectColor;
+        public Color highlightColor;
+        [HideInInspector]
         public bool isSelected;
         public SpriteRenderer m_spriteRenderer;
         public SpriteRenderer selectSpriteRenderer;
@@ -34,13 +36,13 @@
         public void Highlight()
         {
             if (isSelected) return;
-            selectSpriteRenderer.color = Color.yellow;
+            selectSpriteRenderer.color = highlightColor;
             selectSpriteRenderer.enabled = true;
         }
 
         public void Select()
         {
-            selectSpriteRenderer.color = Color.green;
+            selectSpriteRenderer.color = selectColor;
             selectSpriteRenderer.enabled = true;
             isSelected = true;
         }
