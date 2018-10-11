@@ -21,6 +21,7 @@
 
         public BiomeGrid[] biomeElements;
         public Dictionary<HexCoordinate, GridEntity> dirGridEntity = new Dictionary<HexCoordinate, GridEntity>();
+        public List<HexCoordinate> emptyGrid = new List<HexCoordinate>();
 
         [Range(40, 50)]
         public int randomFillPercent;
@@ -104,6 +105,10 @@
                         gridEntity.Init(new GridElement(biomeElements[map[x, y]]), new Vector2(x, y));
                         dirGridEntity.Add(new HexCoordinate(x, y), gridEntity);
                         //go.GetComponent<SpriteRenderer>().sprite = mapGrid.gridElement.image;
+                    }
+                    else
+                    {
+                        emptyGrid.Add(new HexCoordinate(x, y));
                     }
                 }
             }
