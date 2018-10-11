@@ -522,7 +522,9 @@ MonoBehaviour:
   Level: 0
   Skills:
     Stats:
-      stats: []
+      stats:
+      - Type: 0
+        Value: 8.101749
   StartingEquipment:
     MainHand: {fileID: 0}
     Offhand: {fileID: 0}

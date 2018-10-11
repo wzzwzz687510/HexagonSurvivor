@@ -16,6 +16,10 @@ MonoBehaviour:
   Notes: 
   type: 0
   cost: 1
+  GridRarity: 2
   images:
   - {fileID: 21300000, guid: 9ac2ee566c4b30343b1ba069355ea85b, type: 3}
-  GridRarity: 2
+  blockSprites:
+  - {fileID: 21300000, guid: 24cfc43ee48473c47bba0fc82a551ee8, type: 3}
+  - {fileID: 21300000, guid: 05559dbdb72cc344586d9ca85e1ca7ea, type: 3}
+  - {fileID: 21300000, guid: 3bf22b24125e5db44b6fdecb8b253adb, type: 3}

@@ -360,7 +360,7 @@ Prefab:
     - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
         type: 2}
       propertyPath: seed
-      value: Lucky Day
+      value: Lucky Day?
       objectReference: {fileID: 0}
     - target: {fileID: 114798314822651752, guid: 41fb80001747e5741a106086347b3293,
         type: 2}
