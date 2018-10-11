@@ -57,18 +57,58 @@
         /// <summary>
         /// Move related
         /// </summary>
-        [HideInInspector] public Vector2 destination;
-        private Queue<Vector2> movePath;
+        [HideInInspector] public HexCoordinate destination;
+        [HideInInspector] public HexCoordinate currentPosition;
+        private Stack<HexCoordinate> movePath = new Stack<HexCoordinate>();
+        private HexGrid hexGrid;
+        private bool isWait4NewNav;
 
-        public void NavigateDestination(Vector2 v2)
+        private void Start()
         {
-            List<HexCoordinate> hexCoordinates;
-            agent.destination = v2;
+            hexGrid = new HexGrid();
         }
 
-        public void SetDestination(Vector2 v2)
+        private void Update()
+        {
+            if (isWait4NewNav && agent.remainingDistance < 0.01f)
+            {
+                movePath.Clear();
+                NavigateDestination(destination);
+                isWait4NewNav = false;
+            }
+
+            SetDestination();
+        }
+
+        public void NavigateDestination(HexCoordinate v2)
         {
             destination = v2;
+            //Debug.Log("Goal("+v2.col + "," + v2.row+")");
+            if (movePath.Count != 0)
+            {
+                isWait4NewNav = true;
+                return;
+            }
+                
+            var astar = new AStarSearch(hexGrid, new Location(currentPosition), new Location(v2));
+            movePath = astar.path;
+        }
+
+        public void SetDestination()
+        {
+            if(movePath.Count == 0)
+            {
+                SystemManager._instance.cameraManager.SelectResume();
+                return;
+            }
+
+            if (agent.remainingDistance < 0.01f)
+            {
+                HexCoordinate hex = movePath.Pop();
+                //Debug.Log(hex.col + "," + hex.row);
+                currentPosition = hex;
+                agent.destination = SystemManager._instance.mapGenerator.dirGridEntity[hex].transform.position;
+            }
         }
 
     }

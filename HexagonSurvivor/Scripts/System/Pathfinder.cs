@@ -1,7 +1,6 @@
 ﻿namespace HexagonSurvivor
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using Priority_Queue;
 
@@ -22,6 +21,12 @@
         {
             this.x = x;
             this.y = y;
+        }
+
+        public Location(float x,float y)
+        {
+            this.x = (int)x;
+            this.y = (int)y;
         }
 
         public Location(HexCoordinate hex)
@@ -53,7 +58,12 @@
             {
                 if (item.isBlocked)
                     walls.Add(new Location(item.hex));
-            }            
+            }
+
+            foreach (var item in SystemManager._instance.mapGenerator.emptyGrid)
+            {
+                walls.Add(new Location(item));
+            }
         }
 
         public bool Passable(Location id)
@@ -90,6 +100,8 @@
         public Dictionary<Location, float> costSoFar
             = new Dictionary<Location, float>();
 
+        private Location start, goal;
+
         // Note: a generic version of A* would abstract over Location and
         // also Heuristic
         static public float Heuristic(Location a, Location b)
@@ -99,6 +111,8 @@
 
         public AStarSearch(WeightedGraph<Location> graph, Location start, Location goal)
         {
+            this.start = start;
+            this.goal = goal;
             var frontier = new SimplePriorityQueue<Location>();
             frontier.Enqueue(start, 0);
 
@@ -127,6 +141,23 @@
                         cameFrom[next] = current;
                     }
                 }
+            }
+        }
+
+        public Stack<HexCoordinate> path
+        {
+            get
+            {
+                Stack<HexCoordinate> hex = new Stack<HexCoordinate>();
+                Location temp = goal;
+                while (true)
+                {
+                    hex.Push(new HexCoordinate(temp.x, temp.y));
+                    temp = cameFrom[temp];
+                    if (temp.Equals(start))
+                        break;
+                }
+                return hex;
             }
         }
     }
