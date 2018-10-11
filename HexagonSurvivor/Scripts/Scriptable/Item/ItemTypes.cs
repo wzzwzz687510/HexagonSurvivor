@@ -13,6 +13,7 @@
         Amulet,
         Boots,
         Consumable,
-        Flask
+        Flask,
+        Material
     }
 }

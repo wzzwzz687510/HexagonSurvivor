@@ -40,7 +40,7 @@
         [BoxGroup(STATS_BOX_GROUP)]
         public int maxStackSize = 1;
 
-        [BoxGroup(STATS_BOX_GROUP)]
+        [BoxGroup(STATS_BOX_GROUP),Range(0,1)]
         public float itemRarity;
 
         [BoxGroup(STATS_BOX_GROUP)]

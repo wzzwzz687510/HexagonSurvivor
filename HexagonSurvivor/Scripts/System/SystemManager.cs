@@ -28,7 +28,8 @@
 
         public void OnClickMove(HexCoordinate hex)
         {
-            m_player.NavigateDestination(hex);
+            if (!mapGenerator.dirGridEntity[hex].isBlocked)
+                m_player.NavigateDestination(hex);
         }
 
     }

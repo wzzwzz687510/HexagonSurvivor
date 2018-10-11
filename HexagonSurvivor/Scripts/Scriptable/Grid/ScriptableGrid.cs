@@ -26,16 +26,25 @@
         public string Notes;
 
         [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
+        [ValueDropdown("SupportedGridTypes")]
+        [ValidateInput("IsSupportedType")]
         public GridType type;
 
         [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
         public float cost = 1;
 
-        [VerticalGroup(GENERAL_SETTINGS_VERTICAL_GROUP)]
-        public Sprite[] images;
-
         [BoxGroup(STATS_BOX_GROUP)]
         public int GridRarity;
+
+        [BoxGroup(STATS_BOX_GROUP)]
+        public Sprite[] images;
+
+        public abstract GridType[] SupportedGridTypes { get; }
+
+        private bool IsSupportedType(GridType type)
+        {
+            return this.SupportedGridTypes.Contains(type);
+        }
 
         static Dictionary<int, ScriptableGrid> cache;
         public static Dictionary<int, ScriptableGrid> dict

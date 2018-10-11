@@ -1,12 +1,13 @@
 ﻿namespace HexagonSurvivor
 {
     using Sirenix.OdinInspector;
+    using System.Collections.Generic;
     using UnityEngine;
 
-    public class BiomeGrid : ScriptableGrid
+    public class ResourceGrid : ScriptableGrid
     {
         [BoxGroup(STATS_BOX_GROUP)]
-        public Sprite[] blockSprites;
+        public Dictionary<ScriptableItem, int> item = new Dictionary<ScriptableItem, int>();
 
         public override GridType[] SupportedGridTypes
         {
@@ -14,7 +15,7 @@
             {
                 return new GridType[]
                 {
-                    GridType.Biome
+                    GridType.Resource
                 };
             }
         }
