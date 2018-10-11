@@ -22,6 +22,12 @@ namespace HexagonSurvivor
             this.col = col;
             this.row = row;
         }
+
+        public HexCoordinate(Vector2 v2)
+        {
+            this.col = (int)v2.x;
+            this.row = (int)v2.y;
+        }
     }
 
     public class GridUtils
