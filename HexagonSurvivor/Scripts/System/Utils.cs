@@ -31,5 +31,13 @@
             // OnGUI check
             return GUIUtility.hotControl != 0;
         }
+
+        //public static HexCoordinate Position2HexCoordinate(Vector2 v2)
+        //{
+        //    HexCoordinate hex = new HexCoordinate();
+        //    hex.row = (int)(v2.y / 1.0875f);
+        //    hex.col = (int)(v2.x / 1.25f - hex.row % 2 * 0.5f);
+        //    return hex;
+        //}
     }
 }
