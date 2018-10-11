@@ -113,15 +113,7 @@
             if (Input.GetMouseButtonDown(0))
             {
 
-                if (selectedGrid.Count!=0)
-                {
-                    foreach (var item in selectedGrid)
-                    {
-                        if (item)
-                            item.Resume(true);
-                    }
-                    selectedGrid.Clear();
-                }
+                SelectResume();
                 SpriteManager spriteManager = hit.collider.GetComponent<SpriteManager>();
                 if (spriteManager)
                 {
@@ -131,25 +123,16 @@
                         if (item)
                             item.Select();
                     }
-                    SystemManager._instance.OnClickMove(hit.collider.transform.position);
+                    SystemManager._instance.OnClickMove(spriteManager.GetComponent<GridEntity>().hex);
                 }
             }
             else
             {
-
-                if (highlightedGrid.Count != 0)
-                {
-                    foreach (var item in highlightedGrid)
-                    {
-                        if (item)
-                            item.Resume(false);
-                    }
-                    highlightedGrid.Clear();
-                }
+                HighlightResume();
                 GridEntity gridEntity = hit.collider.GetComponent<GridEntity>();
                 if (gridEntity)
                 {
-                    MultiplyAdd(SelectType.Ring, gridEntity);
+                    MultiplyAdd(SelectType.Normal, gridEntity);
                     //highlightedGrid.Add(spriteManager);
                     foreach (var item in highlightedGrid)
                     {
@@ -187,6 +170,32 @@
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void SelectResume()
+        {
+            if (selectedGrid.Count != 0)
+            {
+                foreach (var item in selectedGrid)
+                {
+                    if (item)
+                        item.Resume(true);
+                }
+                selectedGrid.Clear();
+            }
+        }
+
+        public void HighlightResume()
+        {
+            if (highlightedGrid.Count != 0)
+            {
+                foreach (var item in highlightedGrid)
+                {
+                    if (item)
+                        item.Resume(false);
+                }
+                highlightedGrid.Clear();
             }
         }
     } 
