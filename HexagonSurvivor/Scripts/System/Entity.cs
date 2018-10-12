@@ -140,11 +140,60 @@
         // => should always be normalized so that the animator doesn't do blending
         public Vector2 lookDirection = Vector2.down; // down by default
 
+        /// <summary>
+        /// Move related
+        /// </summary>
+        [HideInInspector] public HexCoordinate destination;
+        [HideInInspector] public HexCoordinate currentPosition;
+        protected Stack<HexCoordinate> movePath = new Stack<HexCoordinate>();
+        protected HexGrid hexGrid;
+        private bool isWait4NewNav;
+
         public List<ItemSlot> inventory;
 
         protected virtual void Update()
         {
             _state = UpdateState();
+
+            if (isWait4NewNav && agent.remainingDistance < 0.01f)
+            {
+                movePath.Clear();
+                NavigateDestination(destination);
+                isWait4NewNav = false;
+            }
+        }
+
+        protected bool NavigateDestination(HexCoordinate v2)
+        {
+            destination = v2;
+            //Debug.Log("Goal("+v2.col + "," + v2.row+")");
+            if (movePath.Count != 0)
+            {
+                isWait4NewNav = true;
+                return false;
+            }
+
+            var astar = new AStarSearch(hexGrid, new Location(currentPosition), new Location(v2));
+            movePath = astar.path;
+            return true;
+        }
+
+        protected void SetDestination()
+        {
+            if (movePath.Count == 0)
+            {
+                if (agent.remainingDistance < 0.1f)
+                    SystemManager._instance.cameraManager.SelectResume();
+                return;
+            }
+
+            if (agent.remainingDistance < 0.01f)
+            {
+                HexCoordinate hex = movePath.Pop();
+                //Debug.Log(hex.col + "," + hex.row);
+                currentPosition = hex;
+                agent.destination = SystemManager._instance.mapGenerator.dirGridEntity[hex].transform.position;
+            }
         }
 
         protected abstract EntityState UpdateState();

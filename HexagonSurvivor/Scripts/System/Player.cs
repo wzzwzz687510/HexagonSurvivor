@@ -63,15 +63,6 @@
 
         HashSet<CmdEvent> cmdEvents = new HashSet<CmdEvent>();
 
-        /// <summary>
-        /// Move related
-        /// </summary>
-        [HideInInspector] public HexCoordinate destination;
-        [HideInInspector] public HexCoordinate currentPosition;
-        private Stack<HexCoordinate> movePath = new Stack<HexCoordinate>();
-        private HexGrid hexGrid;
-        private bool isWait4NewNav;
-
         private void Start()
         {
             hexGrid = new HexGrid();
@@ -81,12 +72,7 @@
         {
             base.Update();
             Debug.Log(state);
-            if (isWait4NewNav && agent.remainingDistance < 0.01f)
-            {
-                movePath.Clear();
-                NavigateDestination(destination);
-                isWait4NewNav = false;
-            }
+
 
             if (state == EntityState.MOVING)
                 SetDestination();
@@ -132,37 +118,10 @@
         bool EventMoveEnd()
         { return state == EntityState.MOVING && movePath.Count == 0 && agent.remainingDistance < 0.01f; }
 
-        public void NavigateDestination(HexCoordinate v2)
+        public void PlayerNavigate(HexCoordinate v2)
         {
-            destination = v2;
-            //Debug.Log("Goal("+v2.col + "," + v2.row+")");
-            if (movePath.Count != 0)
-            {
-                isWait4NewNav = true;
-                return;
-            }
-                
-            var astar = new AStarSearch(hexGrid, new Location(currentPosition), new Location(v2));
-            movePath = astar.path;
-            cmdEvents.Add(CmdEvent.NavigateDestination);
-        }
-
-        public void SetDestination()
-        {
-            if(movePath.Count == 0)
-            {
-                if (agent.remainingDistance < 0.1f)
-                    SystemManager._instance.cameraManager.SelectResume();
-                return;
-            }
-
-            if (agent.remainingDistance < 0.01f)
-            {
-                HexCoordinate hex = movePath.Pop();
-                //Debug.Log(hex.col + "," + hex.row);
-                currentPosition = hex;
-                agent.destination = SystemManager._instance.mapGenerator.dirGridEntity[hex].transform.position;
-            }
+            if(NavigateDestination(v2))
+                cmdEvents.Add(CmdEvent.NavigateDestination);
         }
 
     }

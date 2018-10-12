@@ -35,7 +35,7 @@
         public void OnClickMove(HexCoordinate hex)
         {
             if (!mapGenerator.dirGridEntity[hex].isBlocked)
-                m_player.NavigateDestination(hex);
+                m_player.PlayerNavigate(hex);
         }
 
         public void Interaction()
