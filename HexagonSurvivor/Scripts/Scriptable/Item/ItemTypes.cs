@@ -14,6 +14,7 @@
         Boots,
         Consumable,
         Flask,
-        Material
+        Material,
+        Axe
     }
 }
