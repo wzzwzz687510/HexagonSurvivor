@@ -26,10 +26,21 @@
             cameraManager.target = go.transform;
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.E) && m_player.state == EntityState.IDLE)
+                Interaction();
+        }
+
         public void OnClickMove(HexCoordinate hex)
         {
             if (!mapGenerator.dirGridEntity[hex].isBlocked)
                 m_player.NavigateDestination(hex);
+        }
+
+        public void Interaction()
+        {
+
         }
 
     }

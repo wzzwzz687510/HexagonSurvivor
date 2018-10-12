@@ -5,9 +5,17 @@
     using System.Linq;
     using UnityEngine;
 
+    public enum EntityState
+    {
+        IDLE,
+        MOVING,
+        INTERACTING,
+        DEAD
+    }
+
     [RequireComponent(typeof(Rigidbody2D))] // kinematic, only needed for OnTrigger
     [RequireComponent(typeof(NavMeshAgent2D))]
-    public class Entity : MonoBehaviour
+    public abstract class Entity : MonoBehaviour
     {
         [Header("Components")]
         public NavMeshAgent2D agent;
@@ -17,8 +25,8 @@
         // finite state machine
         // -> state only writable by entity class to avoid all kinds of confusion
         [Header("State")]
-        [SerializeField] string _state = "IDLE";
-        public string state { get { return _state; } }
+        [SerializeField] EntityState _state = EntityState.IDLE;
+        public EntityState state { get { return _state; } }
 
         // 'Entity' can't be SyncVar and NetworkIdentity causes errors when null,
         // so we use [SyncVar] GameObject and wrap it for simplicity
@@ -133,6 +141,13 @@
         public Vector2 lookDirection = Vector2.down; // down by default
 
         public List<ItemSlot> inventory;
+
+        protected virtual void Update()
+        {
+            _state = UpdateState();
+        }
+
+        protected abstract EntityState UpdateState();
 
         // inventory ///////////////////////////////////////////////////////////////
         // helper function to find an item in the inventory

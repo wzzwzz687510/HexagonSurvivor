@@ -4,6 +4,13 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    enum CmdEvent
+    {
+        NavigateDestination,
+        CancelAction,
+        Respawn
+    }
+
     public class Player : Entity
     {
         // some meta info
@@ -54,6 +61,8 @@
         [Header("Trash")]
         public ItemSlot trash = new ItemSlot();
 
+        HashSet<CmdEvent> cmdEvents = new HashSet<CmdEvent>();
+
         /// <summary>
         /// Move related
         /// </summary>
@@ -68,8 +77,10 @@
             hexGrid = new HexGrid();
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+            Debug.Log(state);
             if (isWait4NewNav && agent.remainingDistance < 0.01f)
             {
                 movePath.Clear();
@@ -77,8 +88,49 @@
                 isWait4NewNav = false;
             }
 
-            SetDestination();
+            if (state == EntityState.MOVING)
+                SetDestination();
         }
+
+        protected override EntityState UpdateState()
+        {
+            if (state == EntityState.IDLE) return UpdateState_IDLE();
+            if (state == EntityState.MOVING) return UpdateState_MOVING();
+            if (state == EntityState.INTERACTING) return UpdateState_INTERACTING();
+            if (state == EntityState.DEAD) return UpdateState_DEAD();
+            Debug.LogError("invalid state:" + state);
+            return EntityState.IDLE;
+        }
+
+        private EntityState UpdateState_IDLE()
+        {
+            if (EventNavigateDestination())
+                return EntityState.MOVING;
+            return EntityState.IDLE;
+        }
+
+        private EntityState UpdateState_MOVING()
+        {
+            if (EventMoveEnd())
+                return EntityState.IDLE;
+            return EntityState.MOVING;
+        }
+
+        private EntityState UpdateState_INTERACTING()
+        {
+            return EntityState.INTERACTING;
+        }
+
+        private EntityState UpdateState_DEAD()
+        {
+            return EntityState.DEAD;
+        }
+
+        bool EventNavigateDestination()
+        { return cmdEvents.Remove(CmdEvent.NavigateDestination); }
+
+        bool EventMoveEnd()
+        { return state == EntityState.MOVING && movePath.Count == 0 && agent.remainingDistance < 0.01f; }
 
         public void NavigateDestination(HexCoordinate v2)
         {
@@ -92,13 +144,15 @@
                 
             var astar = new AStarSearch(hexGrid, new Location(currentPosition), new Location(v2));
             movePath = astar.path;
+            cmdEvents.Add(CmdEvent.NavigateDestination);
         }
 
         public void SetDestination()
         {
             if(movePath.Count == 0)
             {
-                SystemManager._instance.cameraManager.SelectResume();
+                if (agent.remainingDistance < 0.1f)
+                    SystemManager._instance.cameraManager.SelectResume();
                 return;
             }
 
