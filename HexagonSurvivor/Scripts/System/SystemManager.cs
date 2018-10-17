@@ -1,4 +1,4 @@
-﻿namespace HexagonSurvivor {
+﻿namespace HexagonUtils {
     using UnityEngine;
 
     public class SystemManager : MonoBehaviour {
