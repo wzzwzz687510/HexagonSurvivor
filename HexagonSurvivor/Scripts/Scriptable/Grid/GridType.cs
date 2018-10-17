@@ -1,4 +1,4 @@
-﻿namespace HexagonSurvivor
+﻿namespace HexagonUtils
 {
     public enum GridType
     {

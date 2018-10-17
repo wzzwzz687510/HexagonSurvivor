@@ -1,4 +1,4 @@
-﻿namespace HexagonSurvivor
+﻿namespace HexagonUtils
 {
     using Sirenix.OdinInspector;
     using System.Collections.Generic;

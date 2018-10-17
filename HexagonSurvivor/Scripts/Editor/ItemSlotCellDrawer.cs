@@ -1,4 +1,4 @@
-﻿namespace HexagonSurvivor
+﻿namespace HexagonUtils
 {
     using UnityEngine;
     using Sirenix.OdinInspector.Editor;

@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 
-namespace HexagonSurvivor
+namespace HexagonUtils
 {
     public abstract class EquipableItem : ScriptableItem
     {
