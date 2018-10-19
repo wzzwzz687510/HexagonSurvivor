@@ -189,13 +189,13 @@ namespace HexagonUtils
             return result;
         }
 
-        public static List<HexCoordinate> HexSpiralRings(HexCoordinate center,int radius)
+        public static List<HexCoordinate> HexSpiralRings(HexCoordinate center, int radius)
         {
             List<HexCoordinate> result = new List<HexCoordinate>();
             List<HexCoordinate> temp;
             for (int i = 0; i < radius; i++)
             {
-                temp = HexRing(center, i);
+                temp = HexRing(center, i + 1);
                 foreach (var item in temp)
                 {
                     result.Add(item);
