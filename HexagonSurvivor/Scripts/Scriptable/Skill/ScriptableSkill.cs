@@ -90,6 +90,7 @@
                         targetHexs.Add(item);
                     break;
                 case CastType.Area:
+                    targetHexs.Add(position);
                     foreach (var item in GridUtils.HexSpiralRings(position, radius))
                         targetHexs.Add(item);
                     break;
@@ -160,6 +161,8 @@
         {
             List<Entity> entities = new List<Entity>();
             Entity temp;
+            if (SystemManager._instance.battleManager.dirEntity.TryGetValue(castPosition, out temp))
+                entities.Add(temp);
             foreach (var item in GridUtils.HexSpiralRings(castPosition, radius))
             {
                 if (SystemManager._instance.battleManager.dirEntity.TryGetValue(item, out temp))
