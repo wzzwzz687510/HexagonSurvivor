@@ -17,7 +17,8 @@
         Male,
         Female,
         Asexual,
-        Bisexual
+        Bisexual,
+        Desexual
     }
 
     public enum Element
@@ -41,6 +42,6 @@
 
     public struct SpeciesProperty
     {
-        public int Strength, Agility, Constitution, Intelligence, Charisma, Luck;
+        public LevelBasedInt Strength, Agility, Constitution, Intelligence, Charisma, Luck, Life;
     }
 }

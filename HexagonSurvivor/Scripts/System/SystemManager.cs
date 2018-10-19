@@ -1,4 +1,5 @@
 ﻿namespace HexagonUtils {
+    using System.Collections.Generic;
     using UnityEngine;
 
     public class SystemManager : MonoBehaviour {
@@ -8,6 +9,7 @@
         public GameObject playerPrefab;
         public MapGenerator mapGenerator;
         public CameraManager cameraManager;
+        public BattleManager battleManager;
 
         private Player m_player;
 

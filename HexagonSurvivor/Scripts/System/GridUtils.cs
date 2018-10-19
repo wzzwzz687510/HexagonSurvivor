@@ -69,7 +69,7 @@ namespace HexagonUtils
             return new HexCoordinate(hex.col + (int)dir[0], hex.row + (int)dir[1]);
         }
 
-        static HexCoordinate HexAdd(HexCoordinate hex, int direction,int radius)
+        public static HexCoordinate HexAdd(HexCoordinate hex, int direction, int radius)
         {
             HexCoordinate result = hex;
             for (int i = 0; i < radius; i++)
@@ -121,13 +121,19 @@ namespace HexagonUtils
             return CubeRound(Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
         }
 
+        /// <summary>
+        /// Return include hex b
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static List<HexCoordinate> HexLineDraw(HexCoordinate a, HexCoordinate b)
         {
             List<HexCoordinate> result = new List<HexCoordinate>();
             var ac = HexCoordinate2CubeCoordinate(a);
             var bc = HexCoordinate2CubeCoordinate(b);
             var num = CubeDistance(ac, bc);
-            for (int i = 0; i < num; i++)
+            for (int i = 1; i < num + 1; i++)
             {
                 result.Add(CubeCoordinate2HexCoordinate(CubeLerp(ac, bc, 1.0f / num * i)));
             }

@@ -71,7 +71,7 @@
         protected override void Update()
         {
             base.Update();
-            Debug.Log(state);
+            //Debug.Log(state);
 
 
             if (state == EntityState.MOVING)

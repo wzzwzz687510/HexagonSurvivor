@@ -4,9 +4,7 @@
 
     public class GridEntity : MonoBehaviour
     {
-        [HideInInspector]
         public GridElement gridElement;
-        [HideInInspector]
         public HexCoordinate hex;
         public bool isBlocked;
         public SpriteManager m_spriteManager;

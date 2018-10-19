@@ -596,3 +596,4 @@ MonoBehaviour:
   target: {fileID: 0}
   offset: {x: 0, y: 0}
   damp: 5
+  skill: {fileID: 11400000, guid: 243b6d6a35e1e364eb01ce81e4c00dd2, type: 2}

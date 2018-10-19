@@ -7,7 +7,7 @@
     public class ResourceGrid : ScriptableGrid
     {
         [BoxGroup(STATS_BOX_GROUP)]
-        [ValueDropdown("SupportedGridTypes")]
+        [ValueDropdown("SupportedItemTypes")]
         public ItemTypes[] needItemTypes;
 
         [BoxGroup(STATS_BOX_GROUP)]
@@ -33,7 +33,7 @@
             {
                 return new ItemTypes[]
                 {
-                    ItemTypes.Axe,
+                    ItemTypes.Axe
                 };
             }
         }

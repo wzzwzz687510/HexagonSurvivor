@@ -6,10 +6,10 @@
     {
         public Color selectColor;
         public Color highlightColor;
-        [HideInInspector]
         public bool isSelected;
         public SpriteRenderer m_spriteRenderer;
         public SpriteRenderer selectSpriteRenderer;
+        public GridEntity m_gridEntity;
 
         void Start()
         {
@@ -23,6 +23,12 @@
             {
                 selectSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
                 Debug.Log("[Sprite Manager]Please set the target of selectSpriteRenderer.");
+            }
+
+            if (!m_gridEntity)
+            {
+                m_gridEntity = GetComponent<GridEntity>();
+                Debug.Log("[Sprite Manager]Please set the target of m_gridEntity.");
             }
         }
 

@@ -38,10 +38,15 @@
                 .SortMenuItemsByName()
                 .ForEach(this.AddDragHandles);
 
+            // Add all scriptable object skills.
+            tree.AddAllAssetsAtPath("", "Assets/HexagonSurvivor/Resources", typeof(ScriptableSkill), true)
+                .SortMenuItemsByName();
+
             // Add icons to grids.
             tree.EnumerateTree().AddIcons<ScriptableCharacter>(x => x.Icon);
             tree.EnumerateTree().AddIcons<ScriptableGrid>(x => x.Icon);
             tree.EnumerateTree().AddIcons<ScriptableItem>(x => x.Icon);
+            tree.EnumerateTree().AddIcons<ScriptableSkill>(x => x.Icon);
 
             // Add drag handles to grids, so they can be easily dragged into specific map etc...
             tree.EnumerateTree().Where(x => x.ObjectInstance as ScriptableItem)
@@ -80,6 +85,15 @@
                 if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create Item")))
                 {
                     ScriptableObjectCreator.ShowDialog<ScriptableItem>("Assets/HexagonSurvivor/Resources/Items", obj =>
+                    {
+                        obj.Name = obj.name;
+                        base.TrySelectMenuItemWithObject(obj); // Selects the newly created item in the editor
+                    });
+                }
+
+                if (SirenixEditorGUI.ToolbarButton(new GUIContent("Create Skill")))
+                {
+                    ScriptableObjectCreator.ShowDialog<ScriptableSkill>("Assets/HexagonSurvivor/Resources/Skills", obj =>
                     {
                         obj.Name = obj.name;
                         base.TrySelectMenuItemWithObject(obj); // Selects the newly created item in the editor

@@ -119,6 +119,7 @@ MonoBehaviour:
   isSelected: 0
   m_spriteRenderer: {fileID: 212402848318142866}
   selectSpriteRenderer: {fileID: 212664216441469574}
+  m_gridEntity: {fileID: 114759841439801746}
 --- !u!114 &114759841439801746
 MonoBehaviour:
   m_ObjectHideFlags: 1

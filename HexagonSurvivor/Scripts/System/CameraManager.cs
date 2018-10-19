@@ -42,6 +42,8 @@
         [Header("Dampening")]
         public float damp = 5;
 
+        public ScriptableSkill skill;
+
         void Awake()
         {
             if (!m_camera)
@@ -82,7 +84,7 @@
                 return;
             }
 
-            NormalSelect(hit);
+            SkillTargetsTest(hit);
         }
 
         void LateUpdate()
@@ -123,7 +125,7 @@
                         if (item)
                             item.Select();
                     }
-                    SystemManager._instance.OnClickMove(spriteManager.GetComponent<GridEntity>().hex);
+                    SystemManager._instance.OnClickMove(spriteManager.m_gridEntity.hex);
                 }
             }
             else
@@ -143,21 +145,40 @@
             }
         }
 
+        void SkillTargetsTest(RaycastHit2D hit)
+        {
+            HighlightResume();
+            GridEntity gridEntity = hit.collider.GetComponent<GridEntity>();
+            if (gridEntity)
+            {
+                GridEntity tempGrid;
+                foreach (var item in skill.GetTargetHexs(gridEntity.hex))
+                {
+                    if (SystemManager._instance.mapGenerator.dirGridEntity.TryGetValue(item, out tempGrid))
+                        highlightedGrid.Add(tempGrid.m_spriteManager);
+                }
+                foreach (var item in highlightedGrid)
+                {
+                    if (item)
+                        item.Highlight();
+                }
+            }
+        }
+
         void MultiplyAdd(SelectType selectType,GridEntity gridEntity)
         {
             switch (selectType)
             {
                 case SelectType.Normal:
-                    highlightedGrid.Add(gridEntity.GetComponent<SpriteManager>());
+                    highlightedGrid.Add(gridEntity.m_spriteManager);
                     break;
                 case SelectType.Ring:
                     List<HexCoordinate> hexCoordinates = GridUtils.HexRing(gridEntity.hex, 1);
                     GridEntity tempGrid;
                     foreach (var item in hexCoordinates)
                     {
-                        SystemManager._instance.mapGenerator.dirGridEntity.TryGetValue(item, out tempGrid);
-                        if (tempGrid)
-                            highlightedGrid.Add(tempGrid.GetComponent<SpriteManager>());
+                        if (SystemManager._instance.mapGenerator.dirGridEntity.TryGetValue(item, out tempGrid))
+                            highlightedGrid.Add(tempGrid.m_spriteManager);
                     }       
                     break;
                 case SelectType.TriangleUp:

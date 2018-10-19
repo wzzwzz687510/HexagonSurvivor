@@ -13,6 +13,8 @@
         DEAD
     }
 
+    public enum DamageType { Normal, Block, Miss, Crit };
+
     [RequireComponent(typeof(Rigidbody2D))] // kinematic, only needed for OnTrigger
     [RequireComponent(typeof(NavMeshAgent2D))]
     public abstract class Entity : MonoBehaviour
@@ -20,23 +22,13 @@
         [Header("Components")]
         public NavMeshAgent2D agent;
         public Animator animator;
+        public ScriptableDNA m_dNA;
         new public Collider2D collider;
 
-        // finite state machine
-        // -> state only writable by entity class to avoid all kinds of confusion
         [Header("State")]
         [SerializeField] EntityState _state = EntityState.IDLE;
         public EntityState state { get { return _state; } }
-
-        // 'Entity' can't be SyncVar and NetworkIdentity causes errors when null,
-        // so we use [SyncVar] GameObject and wrap it for simplicity
-        [Header("Target")]
-        GameObject _target;
-        public Entity target
-        {
-            get { return _target != null ? _target.GetComponent<Entity>() : null; }
-            set { _target = value != null ? value.gameObject : null; }
-        }
+        public int direaction;
 
         [Header("Level")]
         public int level = 1;
@@ -68,30 +60,30 @@
             }
         }
 
-        [Header("Hunger")]
-        [SerializeField] protected LevelBasedInt _hungerMax = new LevelBasedInt { baseValue = 100 };
-        public virtual int hungerMax
+        [Header("Mana")]
+        [SerializeField] protected LevelBasedInt _manaMax = new LevelBasedInt { baseValue = 100 };
+        public virtual int manaMax
         {
             get
             {
-                return _hungerMax.Get(level);
+                return _manaMax.Get(level);
             }
         }
         int _mana = 1;
         public int mana
         {
-            get { return Mathf.Min(_mana, hungerMax); } // min in case hp>hpmax after buff ends etc.
-            set { _mana = Mathf.Clamp(value, 0, hungerMax); }
+            get { return Mathf.Min(_mana, manaMax); } // min in case hp>hpmax after buff ends etc.
+            set { _mana = Mathf.Clamp(value, 0, manaMax); }
         }
 
         public bool manaRecovery = true; // can be disabled in combat etc.
-        public int baseHungerRecoveryRate = 1;
+        public int baseManaRecoveryRate = 1;
         public int manaRecoveryRate
         {
             get
             {
                 // base
-                return baseHungerRecoveryRate;
+                return baseManaRecoveryRate;
             }
         }
 
@@ -113,6 +105,26 @@
             get
             {
                 return _defense.Get(level);
+            }
+        }
+
+        [Header("Critical")]
+        [SerializeField] protected LevelBasedFloat _criticalChance;
+        public virtual float criticalChance
+        {
+            get
+            {
+                // base + buffs
+                return _criticalChance.Get(level);
+            }
+        }
+        [SerializeField] protected LevelBasedFloat _criticalModifier;
+        public virtual float criticalModifier
+        {
+            get
+            {
+                // base + buffs
+                return _criticalModifier.Get(level);
             }
         }
 
@@ -197,6 +209,57 @@
         }
 
         protected abstract EntityState UpdateState();
+
+        public virtual void DealDamageAt(Entity entity, int amount)
+        {
+            int damageDealt = 0;
+            DamageType damageType = DamageType.Normal;
+
+            // don't deal any damage if entity is invincible
+            if (!entity.invincible)
+            {
+                // block? (we use < not <= so that block rate 0 never blocks)
+                if (entity.defense/amount > 2)
+                {
+                    damageType = DamageType.Block;
+                }
+                // deal damage
+                else
+                {
+                    // critical hit?
+                    if (UnityEngine.Random.value < criticalChance)
+                    {
+                        damageDealt = (int)Mathf.Max(criticalModifier * amount - entity.defense, 1);
+                        damageType = DamageType.Crit;
+                    }
+
+                    // deal the damage
+                    entity.health -= damageDealt;
+                }
+            }
+
+            ShowDamagePopup(damageDealt, damageType);
+        }
+
+        void ShowDamagePopup(int amount, DamageType damageType)
+        {
+            // spawn the damage popup (if any) and set the text
+            if (damagePopupPrefab != null)
+            {
+                // showing it above their head looks best, and we don't have to use
+                // a custom shader to draw world space UI in front of the entity
+                Bounds bounds = collider.bounds;
+                Vector2 position = new Vector3(bounds.center.x, bounds.max.y, bounds.center.z);
+
+                GameObject popup = Instantiate(damagePopupPrefab, position, Quaternion.identity);
+                if (damageType == DamageType.Normal)
+                    popup.GetComponentInChildren<TextMesh>().text = amount.ToString();
+                else if (damageType == DamageType.Block)
+                    popup.GetComponentInChildren<TextMesh>().text = "<i>Block!</i>";
+                else if (damageType == DamageType.Crit)
+                    popup.GetComponentInChildren<TextMesh>().text = amount + " Crit!";
+            }
+        }
 
         // inventory ///////////////////////////////////////////////////////////////
         // helper function to find an item in the inventory
