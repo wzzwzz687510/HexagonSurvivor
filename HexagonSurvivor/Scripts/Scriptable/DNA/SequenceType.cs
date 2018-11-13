@@ -1,8 +1,16 @@
 ﻿namespace HexagonUtils
 {
-    public enum Species
+    public enum Race
     {
-        
+        Dwarf,
+        Elf,
+        Halfling,
+        Human,
+        Dragonborn,
+        Gnome,
+        HalfElf,
+        HalfOrc,
+        Tiefling
     }
 
     public enum SequenceType
@@ -12,7 +20,7 @@
         Element
     }
 
-    public enum SpeciesSex
+    public enum RaceSex
     {
         Male,
         Female,
@@ -40,7 +48,7 @@
     //    Luck
     //}
 
-    public struct SpeciesProperty
+    public struct RaceProperty
     {
         public LevelBasedInt Strength, Agility, Constitution, Intelligence, Charisma, Luck, Life;
     }

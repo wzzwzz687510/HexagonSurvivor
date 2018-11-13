@@ -23,9 +23,11 @@
         public string Description;
 
         [BoxGroup(Sequence_BOX_GROUP)]
-        public SpeciesSex sex;
+        public Race race;
         [BoxGroup(Sequence_BOX_GROUP)]
-        public SpeciesProperty property;
+        public RaceSex sex;
+        [BoxGroup(Sequence_BOX_GROUP)]
+        public RaceProperty property;
         [BoxGroup(Sequence_BOX_GROUP)]
         public ScriptableSequence[] sequence;
     }

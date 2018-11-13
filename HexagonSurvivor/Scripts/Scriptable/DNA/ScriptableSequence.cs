@@ -26,7 +26,7 @@
 
         [ShowIf("type", SequenceType.Property)]
         [BoxGroup(STATS_BOX_GROUP)]
-        public SpeciesProperty properties;
+        public RaceProperty properties;
 
     }
 }
