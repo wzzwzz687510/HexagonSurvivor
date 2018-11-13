@@ -11,5 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ece59cd52e26584389e9637c6bc2ce8, type: 3}
   m_Name: CharacterOverview
   m_EditorClassIdentifier: 
-  AllCharacters:
-  - {fileID: 11400000, guid: 651015ed865c2db40941101abd8d1360, type: 2}
+  AllCharacters: []

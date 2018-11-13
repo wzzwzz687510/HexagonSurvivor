@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: a
   Notes: 
   requiredSequences: []
-  castType: 2
-  direaction: 1
+  castType: 4
+  direaction: 0
   radius: 1
   maxLevel: 1
   manaCost:

@@ -42,6 +42,8 @@
 
         private void Heal(Entity caster, Entity target, int skillLevel)
         {
+            if (!isUnionApplied && target.gameObject.layer.Equals("Enemy"))
+                return;
             if (target.health > 0)
             {
                 target.health += healsHealth.Get(skillLevel);

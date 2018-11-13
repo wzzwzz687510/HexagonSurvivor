@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: TestSkill
   Notes: 
   requiredSequences: []
-  castType: 1
+  castType: 0
   direaction: 0
   radius: 0
   maxLevel: 1

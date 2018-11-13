@@ -41,8 +41,11 @@ namespace HexagonUtils
 
         private void Damage(Entity caster, Entity target, int skillLevel)
         {
-            caster.DealDamageAt(target, caster.damage + damage.Get(skillLevel));
-            SpawnEffect(caster, target);
+            if (isUnionApplied && target.gameObject.layer.Equals("Union"))
+            {
+                caster.DealDamageAt(target, caster.damage + damage.Get(skillLevel));
+                SpawnEffect(caster, target);
+            }
         }
     }
 }

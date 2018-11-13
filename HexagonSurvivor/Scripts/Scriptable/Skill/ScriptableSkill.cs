@@ -39,6 +39,8 @@
         [BoxGroup(Skill_BOX_GROUP)]
         public CastType castType;
         [BoxGroup(Skill_BOX_GROUP)]
+        public bool isUnionApplied;
+        [BoxGroup(Skill_BOX_GROUP)]
         public int direaction = 0;
         [BoxGroup(Skill_BOX_GROUP)]
         public int radius = 0;

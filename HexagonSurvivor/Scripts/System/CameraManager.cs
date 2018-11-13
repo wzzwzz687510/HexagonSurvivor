@@ -84,7 +84,7 @@
                 return;
             }
 
-            SkillTargetsTest(hit);
+            NormalSelect(hit);
         }
 
         void LateUpdate()

@@ -204,8 +204,15 @@
                 HexCoordinate hex = movePath.Pop();
                 //Debug.Log(hex.col + "," + hex.row);
                 currentPosition = hex;
-                agent.destination = SystemManager._instance.mapGenerator.dirGridEntity[hex].transform.position;
+                agent.destination = Utils.HexCoordinate2Position(hex);
+                //agent.destination = SystemManager._instance.mapGenerator.dirGridEntity[hex].transform.position;
             }
+        }
+
+        public void DirectMove(HexCoordinate hex)
+        {
+            currentPosition = hex;
+            agent.destination = Utils.HexCoordinate2Position(hex);
         }
 
         protected abstract EntityState UpdateState();

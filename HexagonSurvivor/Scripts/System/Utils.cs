@@ -39,5 +39,9 @@
         //    hex.col = (int)(v2.x / 1.25f - hex.row % 2 * 0.5f);
         //    return hex;
         //}
+        public static Vector2 HexCoordinate2Position(HexCoordinate hex)
+        {
+            return new Vector2((hex.col + hex.row % 2 * 0.5f) * 1.25f, hex.row * 1.0875f);
+        }
     }
 }

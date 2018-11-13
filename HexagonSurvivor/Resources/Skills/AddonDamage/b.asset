@@ -15,9 +15,9 @@ MonoBehaviour:
   Name: b
   Notes: 
   requiredSequences: []
-  castType: 0
+  castType: 3
   direaction: 5
-  radius: 1
+  radius: 3
   maxLevel: 1
   manaCost:
     baseValue: 0
